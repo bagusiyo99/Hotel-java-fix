@@ -1,0 +1,41 @@
+<div class="container" *ngIf="ad">
+  <div class="row">
+
+    <!-- Kartu Konten Detail View -->
+    <div class="col-md-8">
+      <div class="card detail-card">
+        <div class="img-container">
+          <img class="profile" [src]="avatarUrl" alt="Ad Image" />
+        </div>
+        <div class="text-container">
+          <h1 style="cursor:pointer; color: #000;">{{ ad.serviceName }}</h1>
+          <h4>Harga: {{ ad.price }}</h4>
+          <p class="description">Deskripsi: {{ ad.description }}</p>
+          <p class="description">Nama Perusahaan: {{ ad.companyName }}</p>
+        </div>
+        <button nzSize="small" nz-button nzType="primary" routerLink="/client/dashboard">Kembali</button>
+
+      </div>
+
+    </div>
+
+    <!-- Kartu Formulir Pemesanan -->
+    <div class="col-md-4">
+      <div class="card booking-card">
+        <h2>Book Booking</h2>
+        <form nz-form [formGroup]="validateForm">
+          <div nz-row>
+            <nz-form-label [nzSpan]="24" nzFor="bookDate">Date of Booking</nz-form-label>
+            <nz-form-control>
+              <nz-date-picker formControlName="bookDate" name="bookDate" id="bookDate">
+              </nz-date-picker>
+            </nz-form-control>
+          </div>
+          <button nz-button [nzType]="'primary'" [disabled]="validateForm.invalid" (click)="bookService()">Book</button>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</div>

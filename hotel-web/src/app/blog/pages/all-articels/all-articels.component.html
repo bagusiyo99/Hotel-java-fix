@@ -1,0 +1,26 @@
+<button style="margin-left: 330px;" class="btn btn-success tambah" [routerLink]=" ['/blog/article']" routerLinkActive="active">Tambah Produk</button>
+<div class="container">
+  <div class="row" style="margin: 20px 20px;">
+    <!-- Loop through ads to display each ad in a card -->
+    <div class="col-md-4" *ngFor="let article of articles">
+      <div class="card">
+        <!-- Card image -->
+        <img class="card-img-top" [src]="updateImg(article.returnedImg)" alt="Image of {{ article.title }}" style="height: 300px; width: 100%;">
+
+        <!-- Card body -->
+        <div class="card-body">
+          <!-- Card title -->
+          <h5 class="card-title" style="cursor: pointer; color: #000;">{{ article.title }}</h5>
+          <!-- Card subtitle (price) -->
+          <!-- Card description -->
+          <p class="card-text">Deskripsi: {{ article.description }}</p>
+          <!-- Card buttons -->
+          <div class="btn-group" role="group">
+            <button class="btn btn-primary btn-sm" style="margin-right: 10px;" (click)="updateArticle(article.id)">Update</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteArticle(article.id)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

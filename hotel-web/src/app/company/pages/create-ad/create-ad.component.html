@@ -1,0 +1,56 @@
+<div style="background-color: aliceblue;">
+  <div class="parent">
+    <div class="child">
+      <div nz-row class="imgDiv">
+        <h2 style="margin-left: 230px;">Tambahkan Data</h2>
+      </div>
+
+      <form nz-form [formGroup]="validateForm" (ngSubmit)="postAd()">
+        <div nz-row>
+          <div nz-col nzSpan="24">
+            <!-- Unggah gambar -->
+            <div class="profile-badge">
+              <label for="upload_profile_image" class="upload-label" *ngIf="selectedFile">
+                <img class="profile" [src]="imagePreview" alt="profile" style="width: 100px; height: 100px;" />
+              </label>
+              <input type="file" nz-button nzType="primary" accept="image/x-png, image/gif, image/jpeg" (change)="onFileSelected($event)" />
+            </div>
+
+            <!-- Input nama -->
+            <div nz-col nzSpan="24" style="margin-top: 20px">
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="Nama tidak valid!">
+                  <input nz-input placeholder="Nama" formControlName="serviceName" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <!-- Input harga -->
+            <div nz-col nzSpan="24" style="margin-top: 20px">
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="Harga tidak valid!">
+                  <input nz-input placeholder="Harga" formControlName="price" type="number" min="0" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <!-- Input deskripsi -->
+            <div nz-col nzSpan="24" style="margin-top: 20px">
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="Deskripsi tidak valid!">
+                  <input nz-input placeholder="Deskripsi" formControlName="description" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <!-- Tombol submit -->
+            <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" type="submit">
+              Tambahkan
+            </button>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

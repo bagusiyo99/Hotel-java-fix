@@ -1,0 +1,31 @@
+<nz-table #basicTable [nzData]="bookedServices" [nzPageSize]="20" nzShowPagination="false" nzBordered="true" nzSize="middle" style="padding: 100px;">
+
+  <thead>
+    <tr>
+
+      <th class="heading" style="background-color: rgb(25, 135, 84);  color: white;">Nama Ruangan</th>
+      <th class="heading" style="background-color: rgb(25, 135, 84);   color: white;">Tanggal Boking</th>
+      <th class="heading" style="background-color: rgb(25, 135, 84);   color: white;">Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let booking of basicTable.data">
+      <td style="font-weight: 600; padding: 10px;">{{ booking.serviceName }}</td>
+      <td style="padding: 10px;">{{ booking.bookDate | date : 'dd/MM/yyyy' }}</td>
+      <td style="font-weight: 600; padding: 10px;">
+        <ng-container *ngIf="booking.reservationStatus === 'APPROVED'">
+          <span style="color: green;">Disetujui</span>
+        </ng-container>
+        <ng-container *ngIf="booking.reservationStatus === 'REJECTED'">
+          <span style="color: red;">Kamar atau Ruangan Penuh</span>
+        </ng-container>
+        <ng-container *ngIf="booking.reservationStatus === 'PENDING'">
+          <span style="color: orange;">Pending</span>
+        </ng-container>
+      </td>
+
+    </tr>
+  </tbody>
+
+</nz-table>

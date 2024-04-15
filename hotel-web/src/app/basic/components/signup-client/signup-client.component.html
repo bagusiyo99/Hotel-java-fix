@@ -1,0 +1,52 @@
+<div class="bg">
+  <div class="parent">
+    <div class="child">
+      <div class="content">
+        <div class="imgDiv">
+          <img src="assets/z.png" alt="Your Image" style="width: 200px; height: auto;">
+          <h1 style="text-align: center; color: #09a113;">Sign Up</h1>
+        </div>
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+          <nz-form-item>
+            <nz-form-control nzHasFeedback nzErrorTip="The input is not a valid E-mail!">
+              <input nz-input placeholder="E-mail" formControlName="email" id="email" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control nzHasFeedback nzErrorTip="The input is not a valid nama!">
+              <input nz-input placeholder="name" formControlName="name" id="name" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control nzHasFeedback nzErrorTip="The input is not a valid phone">
+              <input nz-input placeholder="phone" formControlName="phone" id="phone" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control nzHasFeedback nzErrorTip="The input is not a valid lastname">
+              <input nz-input placeholder="lastname" formControlName="lastname" id="lastname" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control nzHasFeedback nzErrorTip="The input is not a valid password">
+              <input nz-input placeholder="password" formControlName="password" id="password" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control nzHasFeedback nzErrorTip="The input is not a valid password">
+              <input nz-input placeholder="Confirm password" formControlName="checkPassword" id="checkPassword" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <button nz-button class="login-form-button login-form-margin">Daftar</button>
+          <p style="text-align: center; margin-top: 10px;">Atau <a routerLink="/login">masuk sekarang!</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

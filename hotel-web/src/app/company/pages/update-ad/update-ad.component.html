@@ -1,0 +1,63 @@
+<div style="background-color: aliceblue;">
+  <div class="parent">
+    <div class="child">
+
+      <div nz-row class="imgDiv">
+        <h2 style="margin-left: 100px;">Update</h2>
+      </div>
+
+      <form nz-form [formGroup]="validateForm" (ngSubmit)="updateAd()">
+        <div nz-row>
+          <div nz-col [nzMd]="24" [nzSm]="24" [nzXs]="24">
+
+            <div class="file-upload-container">
+              <label for="file-upload-label">
+                <input type="file" nz-button nzType="primary" accept="image/x-png, image/gif, image/jpeg" (change)="onFileSelected($event)" class="file-input" />
+              </label>
+
+              <div *ngIf="imagePreview" class="image-preview">
+                <div class="cicle-image">
+                  <img [src]="imagePreview" alt="Existing image" class="preview-image" />
+                </div>
+              </div>
+
+              <div *ngIf="existingImage" class="image-preview">
+                <div class="cicle-image">
+                  <img [src]="existingImage" alt="Existing image" class="preview-image" />
+                </div>
+              </div>
+            </div>
+
+            <div nz-col nzSpan="24" class="input" style="margin-top: 20px">
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="The input is not valid ">
+                  <input nz-input placeholder="Nama" formControlName="serviceName" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div nz-col nzSpan="24" class="input">
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="The input is not valid !">
+                  <input nz-input placeholder="Harga" formControlName="price" type="number" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div nz-col nzSpan="24" class="input">
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="The input is not valid ">
+                  <input nz-input placeholder="Deskripsi" formControlName="description" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <button nz-button class="login-form-button login-form-margin" nzType="primary" type="submit">Update</button>
+
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

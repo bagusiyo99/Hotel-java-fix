@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg bg-success text-white" *ngIf="isCompanyLoggedIn">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="#">Admin</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+        <li class="nav-item">
+          <a class="nav-link text-white" [routerLink]="['/company/dashboard']" routerLinkActive="active">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" [routerLink]="['/company/dashboard']" routerLinkActive="active">Pesanan</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" [routerLink]="['/company/ads']" routerLinkActive="active">Postingan</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" [routerLink]="['/blog/articles']" routerLinkActive="active">articles</a>
+        </li>
+      </ul>
+      <div class="d-flex">
+        <button class="btn btn-danger" type="button" routerLink="/logout" routerLinkActive="active" (click)="loguut()">Logout</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+
+<nav class="navbar navbar-expand-lg bg-success text-white" *ngIf="isClientLoggedIn">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="#">User</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+        <li class="nav-item">
+          <a class="nav-link text-white " routerLinkActive="active">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " [routerLink]="['/client/dashboard']" routerLinkActive="active">Produk</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" [routerLink]="['/client/bookings']" routerLinkActive="active">Pesanan</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" [routerLink]="['/client/ads']" routerLinkActive="active">Kategori</a>
+        </li>
+      </ul>
+      <div class="d-flex">
+        <button class="btn btn-danger" type="button" routerLink="/logout" routerLinkActive="active" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+
+<router-outlet></router-outlet>

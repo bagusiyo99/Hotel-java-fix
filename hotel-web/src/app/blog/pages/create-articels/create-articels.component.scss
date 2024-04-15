@@ -1,0 +1,83 @@
+[nz-form] {
+  max-width: 800px;
+}
+
+.phone-select {
+  width: 70px;
+}
+
+.register-are {
+  margin-bottom: 8px;
+}
+
+.child {
+  padding: 50px;
+  position: absolute;
+  width: 680px;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  background: white;
+  box-shadow: 1px 1px 15px -7px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+
+  margin-bottom: 22px;
+}
+
+nz-form-control {
+  min-width: 280px;
+}
+
+.parent {
+  width: 100%;
+  min-height: 91vh;
+  position: relative;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+}
+
+button {
+  background-color: rgb(40, 170, 92);
+  border: none;
+}
+
+.imgDiv {
+  width: 100%;
+  vertical-align: middle;
+}
+
+.imgDiv h2 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.porifle-bidge {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 180px;
+}
+
+.profile {
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

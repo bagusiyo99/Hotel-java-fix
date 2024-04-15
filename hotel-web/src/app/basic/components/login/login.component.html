@@ -1,0 +1,40 @@
+<div class="bg">
+  <div class="parent">
+    <div class="child">
+      <div class="content">
+        <div class="imgDiv">
+          <img src="assets/s.png" alt="Login Image" class="login-image">
+        </div>
+        <div class="formDiv">
+          <div nz-row>
+            <div nz-col nzSpan="24">
+              <h1>Login</h1>
+            </div>
+          </div>
+          <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+            <nz-form-item>
+              <nz-form-control nzHasFeedback nzErrorTip="The input is not a valid E-mail!">
+                <input nz-input placeholder="E-mail" formControlName="userName" id="email" />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-control nzHasFeedback [nzErrorTip]="errorPass">
+                <input nz-input placeholder="Password" type="password" id="password" formControlName="password" />
+                <ng-template #errorPass let-control>
+                  <ng-container *ngIf="control.hasError('required')">
+                    Password Is Required!
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+
+            <button nz-button class="login-form-button">Login</button>
+            <span>Or <a routerLink="/register_client">register now!</a></span>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

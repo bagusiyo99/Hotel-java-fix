@@ -1,0 +1,72 @@
+.bg {
+  background-color: #F8F8F8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.child {
+  padding: 50px;
+  width: 700px;
+  /* Lebar diperbesar untuk menampung gambar dan formulir */
+  background-color: white;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.imgDiv {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+button {
+  width: 100%;
+  background-color: #09a113;
+  border: none;
+  color: #F8F8F8;
+}
+
+button:hover {
+  background-color: #c9b00c;
+  color: #F8F8F8;
+}
+
+button:active {
+  background-color: #c9b00c;
+  color: #000;
+  /* Atur warna background saat tombol ditekan */
+}
+
+
+a {
+  color: #09a113;
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: #c9b00c;
+  color: #F8F8F8;
+
+  text-decoration: none;
+}
+
+span {
+  font-size: 14px;
+}
+
+.content {
+  display: flex;
+}
+
+.imgDiv {
+  flex: 1;
+  /* Gambar akan memenuhi setengah bagian kiri */
+  padding-right: 20px;
+  /* Jarak antara gambar dan formulir */
+}
+
+form {
+  flex: 1;
+  /* Formulir akan memenuhi setengah bagian kanan */
+}

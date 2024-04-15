@@ -1,0 +1,31 @@
+/* CSS untuk tampilan container */
+.container {
+  margin-top: 20px;
+}
+
+/* CSS untuk tampilan kartu */
+.card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* CSS untuk gambar di kartu detail */
+.img-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* CSS untuk teks di kartu detail */
+.text-container {
+  color: #333;
+}
+
+/* CSS untuk kartu pemesanan */
+.booking-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

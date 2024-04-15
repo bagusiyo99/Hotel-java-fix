@@ -1,0 +1,46 @@
+<div style="background-color: aliceblue;">
+  <div class="parent">
+    <div class="child">
+
+      <div nz-row class="imgDiv">
+        <h2 style="margin-left: 230px;">Tambahkan Data</h2>
+      </div>
+
+      <form nz-form [formGroup]="validateForm" (ngSubmit)="postArticle()">
+        <div nz-row>
+          <div nz-col [nzMd]="24" [nzSm]="24" [nzXs]="24">
+
+            <div class="profile-badge">
+              <label for="upload_profile_image" class="upload-label" *ngIf="selectedFile">
+                <img class="profile" [src]="imagePreview" alt="profile" style="width: 100px; height: 100px;" />
+              </label>
+              <input type="file" nz-button nzType="primary" accept="image/x-png, image/gif, image/jpeg" (change)="onFileSelected($event)" />
+              <button nz-button nzShape="circle"></button>
+            </div>
+
+            <div nz-col nzSpan="24" style="margin-top: 20px">
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="The input is not valid ">
+                  <input nz-input placeholder=" Nama" formControlName="title" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+
+            <div nz-col nzSpan="24" style="margin-top: 20px">
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="The input is not valid ">
+                  <input nz-input placeholder="Deskripsi" formControlName="description" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Tambahkan</button>
+
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
