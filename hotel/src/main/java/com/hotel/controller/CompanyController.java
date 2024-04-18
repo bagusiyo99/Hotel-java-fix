@@ -97,4 +97,11 @@ public class CompanyController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
+    @GetMapping("/search/{name}")
+    public ResponseEntity<?> searchAdByService(@PathVariable String name) {
+        // Mencari iklan menggunakan ClientService dan mengembalikan hasil pencarian
+        return ResponseEntity.ok(companyService.searchAdByName(name));
+    }
 }

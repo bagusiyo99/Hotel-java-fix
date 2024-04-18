@@ -50,6 +50,14 @@ public class CompanyServicempl implements CompanyService {
         return false;
     }
 
+
+    // Metode untuk mencari iklan berdasarkan nama
+    public List<AdDTO> searchAdByName(String name) {
+        // Menggunakan stream untuk memetakan setiap Ad menjadi AdDTO berdasarkan nama yang diberikan
+        return adRepository.findAllByServiceNameContaining(name).stream().map(Ad::getAdDto).collect(Collectors.toList());
+    }
+
+
     // Metode untuk mendapatkan semua iklan berdasarkan ID pengguna (perusahaan)
     public List<AdDTO> getAllAds(Long userId) {
         return adRepository.findAllByUserId(userId).stream().map(Ad::getAdDto).collect(Collectors.toList());
