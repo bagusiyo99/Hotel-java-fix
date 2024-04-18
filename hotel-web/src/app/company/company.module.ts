@@ -10,6 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AllAdsComponent } from './pages/all-ads/all-ads.component';
 import { UpdateAdComponent } from './pages/update-ad/update-ad.component';
 
+import { NzListModule } from 'ng-zorro-antd/list';
+import { FooterCompanyComponent } from '../footer-company/footer-company.component';
 
 
 
@@ -20,14 +22,15 @@ import { UpdateAdComponent } from './pages/update-ad/update-ad.component';
     CreateAdComponent,
     AllAdsComponent,
     UpdateAdComponent,
-
+FooterCompanyComponent,
     
   ],
   imports: [
     CommonModule,
     CompanyRoutingModule,
     DemoNgZorroAntdModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzListModule
   ]
 })
 export class CompanyModule { }

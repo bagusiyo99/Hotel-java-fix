@@ -18,9 +18,10 @@ import { DemoNgZorroAntdModule } from './DemoNgZorroAntdModule';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { SignupCompanyComponent } from './basic/components/signup-company/signup-company.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
-import { CreateAdComponent } from './company/pages/create-ad/create-ad.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NavbarCompanyComponent } from './navbar-company/navbar-company.component';
+import { FooterCompanyComponent } from './footer-company/footer-company.component';
 
 
 registerLocaleData(en);
@@ -33,6 +34,7 @@ registerLocaleData(en);
     SignupClientComponent,
     SignupCompanyComponent,
     LandingPageComponent,
+    NavbarCompanyComponent,
     
   ],
   imports: [

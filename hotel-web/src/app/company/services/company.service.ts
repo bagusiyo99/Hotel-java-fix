@@ -80,7 +80,16 @@ export class CompanyService {
   } 
 
 
-
+  searchAdByName(name:any): Observable<any> {
+    return this.http.get(BASIC_URL + `api/client/search/${name}`, {
+      headers: this.createAuthorizationHeader()
+    }).pipe(
+      catchError(error => {
+        return throwError(error);
+      })
+    );
+    
+  }
 
 
 

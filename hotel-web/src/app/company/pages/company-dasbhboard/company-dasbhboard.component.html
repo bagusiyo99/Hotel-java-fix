@@ -1,45 +1,54 @@
-<nz-table #basicTable [nzData]="bookings" [nzPageSize]="20" nzShowPagination="false" nzBordered nzSize="small" style="padding: 40px;">
+  <!-- Konten aside lainnya -->
+  <div class="menu-inner py-1 mt-4 ">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <table class="table table-bordered text-center" id="data">
+              <thead>
+                <tr class="btn-secondary">
+                  <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Nama Client</th>
+                  <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Ruangan</th>
+                  <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Tanggal Boking</th>
+                  <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Status</th>
+                  <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let booking of bookings" style="border-color: black;">
+                  <td style="font-weight: bold; border-color: black;">{{ booking.userName }}</td>
+                  <td style="font-weight: bold; border-color: black;">{{ booking.serviceName }}</td>
+                  <td style="border-color: black;">{{ booking.bookDate | date : 'dd/MM/yyyy' }}</td>
 
-  <thead style="border-color: black;">
-    <tr>
-      <th class="heading" style="background-color: rgb(25, 135, 84);  color: white;">Nama Client</th>
-      <th class="heading" style="background-color: rgb(25, 135, 84);   color: white;">Ruangan</th>
-      <th class="heading" style="background-color: rgb(25, 135, 84);   color: white;">Tanggal Boking</th>
-      <th class="heading" style="background-color: rgb(25, 135, 84);   color: white;">Status</th>
-      <th class="heading" style="background-color: rgb(25, 135, 84);   color: white;">Aksi</th>
-    </tr>
-  </thead>
+                  <!-- Kolom Status -->
+                  <td style="font-weight: bold; border-color: black;">
+                    <ng-container *ngIf="booking.reservationStatus === 'APPROVED'">
+                      <span style="color: green;">Disetujui</span>
+                    </ng-container>
+                    <ng-container *ngIf="booking.reservationStatus === 'REJECTED'">
+                      <span style="color: red;">Kamar atau Ruangan Penuh</span>
+                    </ng-container>
+                    <ng-container *ngIf="booking.reservationStatus === 'PENDING'">
+                      <span style="color: orange;">Pending</span>
+                    </ng-container>
+                  </td>
 
-  <tbody style="border-color: black;">
-    <tr *ngFor="let booking of bookings" style="border-color: black;">
-      <td style="font-weight: bold; border-color: black;">{{ booking.userName }}</td>
-      <td style="font-weight: bold; border-color: black;">{{ booking.serviceName }}</td>
-      <td style="border-color: black;">{{ booking.bookDate | date : 'dd/MM/yyyy' }}</td>
-
-      <!-- Kolom Status -->
-      <td style="font-weight: bold; border-color: black;">
-        <ng-container *ngIf="booking.reservationStatus === 'APPROVED'">
-          <span style="color: green;">Disetujui</span>
-        </ng-container>
-        <ng-container *ngIf="booking.reservationStatus === 'REJECTED'">
-          <span style="color: red;">Kamar atau Ruangan Penuh</span>
-        </ng-container>
-        <ng-container *ngIf="booking.reservationStatus === 'PENDING'">
-          <span style="color: orange;">Pending</span>
-        </ng-container>
-      </td>
-
-      <!-- Kolom Aksi -->
-      <td style="border-color: black;">
-        <span *ngIf="booking.reservationStatus === 'PENDING'">
-          <button nzSize="small" nz-button nzType="primary" style="margin-right: 10px;" (click)="changeBookingStatus(booking.id, 'APPROVE')">
-            Terima
-          </button>
-          <button nzSize="small" nz-button nzType="primary" nzDanger (click)="changeBookingStatus(booking.id, 'REJECTED')">
-            Tolak
-          </button>
-        </span>
-      </td>
-    </tr>
-  </tbody>
-</nz-table>
+                  <!-- Kolom Aksi -->
+                  <td style="border-color: black;">
+                    <span *ngIf="booking.reservationStatus === 'PENDING'">
+                      <button nzSize="small" nz-button nzType="primary" style="margin-right: 10px;" (click)="changeBookingStatus(booking.id, 'APPROVE')">
+                        Terima
+                      </button>
+                      <button nzSize="small" nz-button nzType="primary" nzDanger (click)="changeBookingStatus(booking.id, 'REJECTED')">
+                        Tolak
+                      </button>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
