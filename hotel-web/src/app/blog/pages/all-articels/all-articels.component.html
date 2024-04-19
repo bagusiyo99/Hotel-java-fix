@@ -1,22 +1,27 @@
-<button style="margin-left: 330px;" class="btn btn-success tambah" [routerLink]=" ['/blog/article']" routerLinkActive="active">Tambah Produk</button>
-<div class="container">
-  <div class="row" style="margin: 20px 20px;">
-    <!-- Loop through ads to display each ad in a card -->
-    <div class="col-md-4" *ngFor="let article of articles">
-      <div class="card">
-        <!-- Card image -->
-        <img class="card-img-top" [src]="updateImg(article.returnedImg)" alt="Image of {{ article.title }}" style="height: 300px; width: 100%;">
+<!--  -->
+<form nz-form [formGroup]="validateForm" (ngSubmit)="searchArticleByTitle()" class="my-4 text-center mb-5">
+  <div class="form-group d-inline-flex">
+    <input nz-input placeholder="Pencarian" formControlName="service" nzSize="large" class="form-control mr-4" style="width: 70%;" />
+    <button nz-button nzSize="large" nzType="primary" class="btn btn-success ml-5" style="margin-left: 10px;">Search</button>
+  </div>
+</form>
+<div class="container mb-4">
+  <div class="d-flex justify-content-start">
+    <button class="btn btn-success" [routerLink]="['/blog/article']" routerLinkActive="active">Tambah Produk</button>
+  </div>
+</div>
 
-        <!-- Card body -->
+<div class="container">
+  <div class="row">
+    <!-- Loop through ads to display each ad in a card -->
+    <div class="col-md-4 mb-4" *ngFor="let article of pagedArticles">
+      <div class="card h-100">
+        <img class="card-img-top" [src]="updateImg(article.returnedImg)" alt="Image of {{ article.title }}" style="height: 300px; width: 100%;">
         <div class="card-body">
-          <!-- Card title -->
-          <h5 class="card-title" style="cursor: pointer; color: #000;">{{ article.title }}</h5>
-          <!-- Card subtitle (price) -->
-          <!-- Card description -->
+          <h5 class="card-title">{{ article.title }}</h5>
           <p class="card-text">Deskripsi: {{ article.description }}</p>
-          <!-- Card buttons -->
           <div class="btn-group" role="group">
-            <button class="btn btn-primary btn-sm" style="margin-right: 10px;" (click)="updateArticle(article.id)">Update</button>
+            <button class="btn btn-success btn-sm" (click)="updateArticle(article.id)" style="margin-right: 16px;">Update</button>
             <button class="btn btn-danger btn-sm" (click)="deleteArticle(article.id)">Delete</button>
           </div>
         </div>
@@ -24,3 +29,20 @@
     </div>
   </div>
 </div>
+
+<nav aria-label="Room pagination" class="mt-3 mb-5">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" *ngIf="currentArticlesPage > 1">
+      <button class="page-link" (click)="goToArticlesPage(currentArticlesPage - 1)">Previous</button>
+    </li>
+    <li class="page-item" *ngFor="let page of [].constructor(totalArticlesPages); let i = index">
+      <button class="page-link" [ngClass]="{'active bg-success': currentArticlesPage === i + 1}" (click)="goToArticlesPage(i + 1)">
+
+        {{ i + 1 }}
+      </button>
+    </li>
+    <li class="page-item" *ngIf="currentArticlesPage < totalArticlesPages">
+      <button class="page-link" (click)="goToArticlesPage(currentArticlesPage + 1)">Next</button>
+    </li>
+  </ul>
+</nav>

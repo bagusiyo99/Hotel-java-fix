@@ -36,6 +36,18 @@ export class ClientService {
     
   }
 
+  getUserNameById(): Observable<any> {
+          const userId = UserStorageService.getUserId();
+    return this.http.get(BASIC_URL + `api/client/user/${userId}/name`, {
+      headers: this.createAuthorizationHeader()
+    }).pipe(
+      catchError(error => {
+        return throwError(error);
+      })
+    );
+    
+  }
+
 
     searchAdByName(name:any): Observable<any> {
     return this.http.get(BASIC_URL + `api/client/search/${name}`, {

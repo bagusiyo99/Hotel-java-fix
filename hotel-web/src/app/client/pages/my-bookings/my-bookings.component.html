@@ -1,18 +1,21 @@
 <nz-table #basicTable [nzData]="bookedServices" [nzPageSize]="20" nzShowPagination="false" nzBordered="true" nzSize="middle" style="padding: 100px;">
-
   <thead>
     <tr>
-
-      <th class="heading" style="background-color: rgb(25, 135, 84);  color: white;">Nama Ruangan</th>
-      <th class="heading" style="background-color: rgb(25, 135, 84);   color: white;">Tanggal Boking</th>
-      <th class="heading" style="background-color: rgb(25, 135, 84);   color: white;">Status</th>
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Nama Ruangan</th>
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Harga Booking</th>
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Check-in</th>
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Check-out</th>
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Total Harga</th>
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Status</th>
     </tr>
   </thead>
-
   <tbody>
-    <tr *ngFor="let booking of basicTable.data">
+    <tr *ngFor="let booking of bookedServices">
       <td style="font-weight: 600; padding: 10px;">{{ booking.serviceName }}</td>
-      <td style="padding: 10px;">{{ booking.bookDate | date : 'dd/MM/yyyy' }}</td>
+      <td style="font-weight: 600; padding: 10px;">{{ formatPrice(booking.price) }}</td>
+      <td style="padding: 10px;">{{ booking.checkInDate ? (booking.checkInDate | date: 'd MMMM yyyy') : '-' }}</td>
+      <td style="padding: 10px;">{{ booking.checkOutDate ? (booking.checkOutDate | date: 'd MMMM yyyy') : '-' }}</td>
+      <td style="font-weight: 600; padding: 10px;">{{ formatPrice(booking.totalPrice) }}</td>
       <td style="font-weight: 600; padding: 10px;">
         <ng-container *ngIf="booking.reservationStatus === 'APPROVED'">
           <span style="color: green;">Disetujui</span>
@@ -24,8 +27,6 @@
           <span style="color: orange;">Pending</span>
         </ng-container>
       </td>
-
     </tr>
   </tbody>
-
 </nz-table>

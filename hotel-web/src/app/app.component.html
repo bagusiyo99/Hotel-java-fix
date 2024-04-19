@@ -16,7 +16,10 @@
           <a class="nav-link text-white" [routerLink]="['/company/ads']" routerLinkActive="active">Postingan</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" [routerLink]="['/blog/articles']" routerLinkActive="active">articles</a>
+          <a class="nav-link text-white" [routerLink]="['/blog/articles']" routerLinkActive="active">Artikel</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" [routerLink]="['/blog/articles']" routerLinkActive="active">Kontak</a>
         </li>
       </ul>
       <div class="d-flex">
@@ -37,17 +40,18 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
         <li class="nav-item">
-          <a class="nav-link text-white " routerLinkActive="active">Dashboard</a>
+          <a class="nav-link text-white " [routerLink]="['/client/dashboard']" routerLinkActive="active">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " [routerLink]="['/client/dashboard']" routerLinkActive="active">Produk</a>
+          <a class="nav-link text-white " [routerLink]="['/client/postingan']" routerLinkActive="active">Produk</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link text-white" [routerLink]="['/client/bookings']" routerLinkActive="active">Pesanan</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link text-white" [routerLink]="['/client/ads']" routerLinkActive="active">Kategori</a>
-        </li>
+        </li> -->
       </ul>
       <div class="d-flex">
         <button class="btn btn-danger" type="button" routerLink="/logout" routerLinkActive="active" (click)="logout()">Logout</button>

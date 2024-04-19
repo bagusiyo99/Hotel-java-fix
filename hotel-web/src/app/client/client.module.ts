@@ -9,6 +9,7 @@ import { CompanyRoutingModule } from '../company/company-routing.module';
 import { DemoNgZorroAntdModule } from '../DemoNgZorroAntdModule';
 import { AdDetailComponent } from './pages/ad-detail/ad-detail.component';
 import { MyBookingsComponent } from './pages/my-bookings/my-bookings.component';
+import { PostinganComponent } from './pages/postingan/postingan.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { MyBookingsComponent } from './pages/my-bookings/my-bookings.component';
     ClientComponent,
     ClientDasbhboardComponent,
     AdDetailComponent,
-    MyBookingsComponent
+    MyBookingsComponent,
+    PostinganComponent
   ],
   imports: [
     CommonModule,

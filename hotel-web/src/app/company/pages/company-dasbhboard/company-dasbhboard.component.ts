@@ -11,80 +11,70 @@ import { CompanyService } from '../../services/company.service';
 })
 export class CompanyDasbhboardComponent {
 
-  //03.21
-  bookings:any;
-    constructor (
-    private companyService: CompanyService,
-     private fb :FormBuilder,
-     private notification :NzNotificationService,
-     private router: Router
-     ){}
+ bookings: any;
 
+  constructor(
+    private companyService: CompanyService,
+    private notification: NzNotificationService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.getAllAdBookings();
   }
 
   getAllAdBookings() {
-    this.companyService.getAllAdBookings().subscribe(res => {
-      console.log (res);
-      this.bookings = res;
-    })
+this.companyService.getAllAdBookings().subscribe(res => {
+  // Ubah checkInDate dan checkOutDate ke objek Date
+  res.forEach(item => {
+    item.checkInDate = new Date(item.checkInDate);
+    item.checkOutDate = new Date(item.checkOutDate);
+
+    // Menghitung total harga berdasarkan harga dan durasi
+    const durationInDays = (item.checkOutDate - item.checkInDate) / (1000 * 60 * 60 * 24);
+    item.totalPrice = durationInDays * item.price;
+  });
+
+  // Urutkan data berdasarkan checkInDate dalam urutan menurun
+  this.bookings = res.sort((a, b) => b.checkInDate - a.checkInDate);
+});
+
   }
 
-//   changeBookingStatus(bookingId: number, status: string) {
-//   this.companyService.changeBookingStatus(bookingId, status).subscribe(
-//     res => {
-//       // Notifikasi sukses
-//       this.notification.success(
-//         'SUCCESS',
-//         'Status pemesanan berhasil diubah', 
-//         { nzDuration: 5000 }
-//       );
-//       // Memperbarui daftar pemesanan setelah perubahan status berhasil
-//       this.getAllAdBookings();
-//     },
-//     error => {
-//       // Tangani kesalahan
-//       console.error('Failed to change booking status:', error);
-//       this.notification.error(
-//         'ERROR',
-//         'Gagal mengubah status pemesanan', 
-//         { nzDuration: 5000 }
-//       );
-//     }
-//   );
-// }
+  changeBookingStatus(bookingId: number, status: string) {
+    this.companyService.changeBookingStatus(bookingId, status).subscribe(
+      res => {
+        // Notifikasi sukses
+        this.notification.success(
+          'SUCCESS',
+          'Status pemesanan berhasil diubah',
+          { nzDuration: 5000 }
+        );
+        
+        // Perbarui daftar pemesanan setelah perubahan status berhasil
+        this.getAllAdBookings();
+      },
+      error => {
+        // Tangani kesalahan
+        console.error('Gagal mengubah status pemesanan:', error);
+        this.notification.error(
+          'ERROR',
+          'Gagal mengubah status pemesanan',
+          { nzDuration: 5000 }
+        );
+      }
+    );
+  }
 
-changeBookingStatus(bookingId: number, status: string) {
-  this.companyService.changeBookingStatus(bookingId, status).subscribe(
-    res => {
-      // Notifikasi sukses
-      this.notification.success(
-        'SUCCESS',
-        'Status pemesanan berhasil diubah',
-        { nzDuration: 5000 }
-      );
-      
-      // Memperbarui daftar pemesanan setelah perubahan status berhasil
-      this.getAllAdBookings();
-      
-      // Log untuk memeriksa data yang diperbarui
-      console.log('Bookings after update:', this.bookings);
-    },
-    error => {
-      // Tangani kesalahan
-      console.error('Failed to change booking status:', error);
-      this.notification.error(
-        'ERROR',
-        'Gagal mengubah status pemesanan',
-        { nzDuration: 5000 }
-      );
-    }
-  );
-}
-
-
+  formatPrice(price: number): string {
+    // Format harga dalam format mata uang Indonesia (IDR)
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(price);
+  }
 }
 
 

@@ -14,9 +14,7 @@
           <p class="description">Nama Perusahaan: {{ ad.companyName }}</p>
         </div>
         <button nzSize="small" nz-button nzType="primary" routerLink="/client/dashboard">Kembali</button>
-
       </div>
-
     </div>
 
     <!-- Kartu Formulir Pemesanan -->
@@ -25,15 +23,19 @@
         <h2>Book Booking</h2>
         <form nz-form [formGroup]="validateForm">
           <div nz-row>
-            <nz-form-label [nzSpan]="24" nzFor="bookDate">Date of Booking</nz-form-label>
+            <nz-form-label [nzSpan]="24" nzFor="checkInDate">Tanggal Check-In</nz-form-label>
             <nz-form-control>
-              <nz-date-picker formControlName="bookDate" name="bookDate" id="bookDate">
-              </nz-date-picker>
+              <nz-date-picker formControlName="checkInDate" name="checkInDate" id="checkInDate"></nz-date-picker>
             </nz-form-control>
           </div>
-          <button nz-button [nzType]="'primary'" [disabled]="validateForm.invalid" (click)="bookService()">Book</button>
+          <div nz-row>
+            <nz-form-label [nzSpan]="24" nzFor="checkOutDate">Tanggal Check-Out</nz-form-label>
+            <nz-form-control>
+              <nz-date-picker formControlName="checkOutDate" name="checkOutDate" id="checkOutDate"></nz-date-picker>
+            </nz-form-control>
+          </div>
+          <button nz-button nzType="primary" [disabled]="validateForm.invalid" (click)="bookService()">Pesan Sekarang</button>
         </form>
-
       </div>
     </div>
 

@@ -1,49 +1,24 @@
-<form nz-form [formGroup]="validateForm" (submit)="searchAdByName()" class="my-4 text-center">
-  <div class="form-group d-inline-flex">
-    <input nz-input placeholder="Pencarian" formControlName="service" nzSize="large" class="form-control" style="width: 50%;" />
-    <button nz-button nzSize="large" nz-button nzType="primary" class="btn btn-primary ml-2" [disabled]="validateForm.invalid" style="margin-left: 5px;">Search</button>
-  </div>
-</form>
+<div class="container mt-5">
+  <div class="row align-items-center jumbotron">
+    <!-- Kolom gambar -->
+    <div class="col-md-6">
+      <img src="/assets/s.png" alt="Gambar Selamat Datang" class="img-fluid">
+    </div>
 
-<!-- <div class="row">
-  <div class="col-md-6 mb-3" *ngFor="let ad of ads">
-    <div class="card h-100">
-      <img class="card-img-top" [src]="updateImg(ad.returnedImg)" alt="{{ ad.serviceName }}">
-      <div class="card-body d-flex flex-column">
-        <h5 class="card-title" style="cursor: pointer; color: #000;">{{ ad.serviceName }}</h5>
-        <p class="card-text">Harga: {{ ad.price }}</p>
-        <p class="card-text description">Deskripsi: {{ ad.description }}</p>
-        <div class="mt-auto">
-          <a nz-button nzSize="small" nz-button nzType="primary" routerLink="/client/ad/{{ ad.id }}" class="btn btn-primary">View</a>
-        </div>
-      </div>
+    <!-- Kolom teks -->
+    <div class="col-md-6">
+      <h1 class="display-4">Selamat datang</h1>
+      <p class="lead">Kami senang melihat Anda di sini. Silakan lihat semua layanan dan penawaran kami.</p>
+      <hr class="my-4">
+      <p>Anda dapat menelusuri berbagai iklan dan artikel di bawah ini:</p>
+      <a class="btn btn-primary btn-lg me-2" href="/ads" role="button">
+        <i class="bi bi-bullhorn"></i> Lihat Iklan
+      </a>
+      <a class="btn btn-secondary btn-lg" href="/articles" role="button">
+        <i class="bi bi-newspaper"></i> Lihat Artikel
+      </a>
     </div>
   </div>
-</div> -->
 
-<div class="container">
-  <div class="row" style="margin: 20px 20px;">
-    <!-- Loop through ads to display each ad in a card -->
-    <div class="col-md-4" *ngFor="let ad of ads">
-      <div class="card">
-        <!-- Card image -->
-        <img class="card-img-top" [src]="updateImg(ad.returnedImg)" alt="Image of {{ ad.serviceName }}" style="height: 300px; width: 100%;">
-
-        <!-- Card body -->
-        <div class="card-body">
-          <!-- Card title -->
-          <h5 class="card-title" style="cursor: pointer; color: #000;">{{ ad.serviceName }}</h5>
-          <!-- Card subtitle (price) -->
-          <h6 class="card-subtitle mb-2 text-muted">Harga: {{ formatPrice(ad.price) }}</h6>
-          <!-- Card description -->
-          <p class="card-text">Deskripsi: {{ ad.description }}</p>
-          <!-- Card buttons -->
-          <div class="btn-group" role="group">
-            <a nz-button nzSize="small" nz-button nzType="primary" routerLink="/client/ad/{{ ad.id }}" class="btn btn-primary">View</a>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Daftar pemesanan pengguna -->
 </div>

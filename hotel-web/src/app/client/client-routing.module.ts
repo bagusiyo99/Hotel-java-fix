@@ -4,9 +4,11 @@ import { ClientDasbhboardComponent } from './pages/client-dasbhboard/client-dasb
 import { ClientComponent } from './client.component';
 import { AdDetailComponent } from './pages/ad-detail/ad-detail.component';
 import { MyBookingsComponent } from './pages/my-bookings/my-bookings.component';
+import { PostinganComponent } from './pages/postingan/postingan.component';
 
 const routes: Routes = [
   { path: '', component: ClientComponent },
+  { path: 'postingan', component: PostinganComponent },
   { path: 'dashboard', component: ClientDasbhboardComponent },
   { path: 'bookings', component: MyBookingsComponent },
   { path: 'ad/:adId', component: AdDetailComponent }

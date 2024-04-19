@@ -9,7 +9,11 @@
                 <tr class="btn-secondary">
                   <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Nama Client</th>
                   <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Ruangan</th>
+                  <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Harga</th>
                   <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Tanggal Boking</th>
+                  <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Tanggal checkout</th>
+                  <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Total Harga</th>
+
                   <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Status</th>
                   <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Aksi</th>
                 </tr>
@@ -18,7 +22,10 @@
                 <tr *ngFor="let booking of bookings" style="border-color: black;">
                   <td style="font-weight: bold; border-color: black;">{{ booking.userName }}</td>
                   <td style="font-weight: bold; border-color: black;">{{ booking.serviceName }}</td>
-                  <td style="border-color: black;">{{ booking.bookDate | date : 'dd/MM/yyyy' }}</td>
+                  <td style="font-weight: bold; border-color: black;">{{ formatPrice( booking.price) }}</td>
+                  <td style="border-color: black;">{{ booking.checkInDate | date : 'd MMMM yyyy' }}</td>
+                  <td style="border-color: black;">{{ booking.checkOutDate | date : 'd MMMM yyyy' }}</td>
+                  <td style="font-weight: 600; padding: 10px;">{{ formatPrice(booking.totalPrice) }}</td>
 
                   <!-- Kolom Status -->
                   <td style="font-weight: bold; border-color: black;">
@@ -52,3 +59,4 @@
       </div>
     </div>
   </div>
+  <app-footer-company> </app-footer-company>

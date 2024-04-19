@@ -1,0 +1,48 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="searchAdByName()" class="my-4 text-center mb-5">
+  <div class="form-group d-inline-flex">
+    <input nz-input placeholder="Pencarian" formControlName="service" nzSize="large" class="form-control mr-4" style="width: 70%;" />
+    <button nz-button nzSize="large" nzType="primary" class="btn btn-success ml-5" style="margin-left: 10px;">Search</button>
+  </div>
+</form>
+
+
+<!--  -->
+<div class="container">
+  <div class="row">
+    <!-- Loop through ads to display each ad in a card -->
+    <div class="col-md-4 mb-4" *ngFor="let ad of pagedAds">
+      <div class="card h-100">
+        <img class="card-img-top" [src]="updateImg(ad.returnedImg)" alt="Image of {{ ad.serviceName }}" style="height: 300px; width: 100%;">
+        <div class="card-body">
+          <h5 class="card-title">{{ ad.serviceName }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Harga: {{ formatPrice(ad.price) }}</h6>
+          <p class="card-text">Deskripsi: {{ ad.description }}</p>
+          <div class="btn-group" role="group">
+            <!-- <a nz-button nzSize="small" nz-button nzType="primary" routerLink="/client/ad/{{ ad.id }}" class="btn btn-primary">View</a> -->
+            <button class="btn btn-success btn-sm" routerLink="/client/ad/{{ ad.id }}" style="margin-right: 16px;">Detail</button>
+            <button class="btn btn-warning btn-sm" routerLink="/client/ad/{{ ad.id }}" style="margin-right: 16px;">Pesan Sekarang</button>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav aria-label="Room pagination" class="mt-3 mb-5">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" *ngIf="currentAdsPage > 1">
+      <button class="page-link" (click)="goToAdsPage(currentAdsPage - 1)">Previous</button>
+    </li>
+    <li class="page-item" *ngFor="let page of [].constructor(totalAdsPages); let i = index">
+      <button class="page-link" [ngClass]="{'active bg-success': currentAdsPage === i + 1}" (click)="goToAdsPage(i + 1)">
+
+        {{ i + 1 }}
+      </button>
+    </li>
+    <li class="page-item" *ngIf="currentAdsPage < totalAdsPages">
+      <button class="page-link" (click)="goToAdsPage(currentAdsPage + 1)">Next</button>
+    </li>
+  </ul>
+</nav>

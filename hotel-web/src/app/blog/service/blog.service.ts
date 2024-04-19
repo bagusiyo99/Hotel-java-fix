@@ -71,6 +71,16 @@ export class BlogService {
   }
 
 
+ searchArticleByTitle(title:any): Observable<any> {
+    return this.http.get(BASIC_URL + `api/blog/search/${title}`, {
+      headers: this.createAuthorizationHeader()
+    }).pipe(
+      catchError(error => {
+        return throwError(error);
+      })
+    );
+    
+  }
 
 
   // Method untuk membuat header otorisasi
