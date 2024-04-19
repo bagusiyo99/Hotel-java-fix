@@ -10,7 +10,7 @@ import java.sql.Date;
 public class ReservationDTO {
     private Long id;                          // ID reservasi
 
-    private Date bookDate;                    // Tanggal pemesanan reservasi
+    private Date checkInDate;                    // Tanggal pemesanan reservasi
 
     private String serviceName;               // Nama layanan yang dipesan
 
@@ -25,4 +25,11 @@ public class ReservationDTO {
     private Long companyId;                   // ID perusahaan yang menyediakan layanan
 
     private Long adId;                        // ID iklan terkait layanan yang dipesan
+
+    private Double price;
+
+    // Tanggal check-out
+    private Date checkOutDate;
+
+
 }

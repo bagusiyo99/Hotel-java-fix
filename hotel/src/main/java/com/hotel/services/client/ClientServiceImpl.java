@@ -67,7 +67,9 @@ public class ClientServiceImpl implements ClientService {
         if (optionalAd.isPresent() && optionalUser.isPresent()) {
             // Membuat reservasi baru
             Reservation reservation = new Reservation();
-            reservation.setBookDate(reservationDTO.getBookDate());
+            reservation.setCheckInDate(reservationDTO.getCheckInDate());
+            reservation.setCheckOutDate(reservationDTO.getCheckOutDate()); // Menetapkan checkOutDate
+
             reservation.setReservationStatus(ReservationStatus.PENDING);
             reservation.setUser(optionalUser.get());
 

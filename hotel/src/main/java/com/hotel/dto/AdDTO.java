@@ -20,4 +20,5 @@ public class AdDTO {
     private Long userId;         // ID pengguna yang mengelola iklan
 
     private String companyName;  // Nama perusahaan yang mengelola iklan
+
 }

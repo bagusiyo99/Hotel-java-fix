@@ -61,4 +61,11 @@ public class BlogController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Article not found or user does not have the required Company role.");
         }
     }
+
+    @GetMapping("/search/{title}")
+    public ResponseEntity<?> searchArticleByService(@PathVariable String title) {
+        // Mencari iklan menggunakan ClientService dan mengembalikan hasil pencarian
+        return ResponseEntity.ok(blogService.searchArticleByTitle(title));
+    }
+
 }

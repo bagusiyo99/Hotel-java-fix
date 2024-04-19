@@ -11,6 +11,7 @@ public class ArticleDTO {
     private MultipartFile img;   // File gambar iklan
 
     private byte[] returnedImg;  // Array byte untuk menyimpan gambar yang telah diambil kembali
+    private Double price; // Tambahkan properti price
 
     private Long userId;
     private String userName;

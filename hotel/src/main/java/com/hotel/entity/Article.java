@@ -46,7 +46,7 @@ public class Article {
         articleDTO.setReturnedImg(img);
         articleDTO.setCompanyName(user.getName()); // Tambahkan nama perusahaan ke DTO
 
-        // Mengembalikan objek AdDTO
+        // Mengembalikan objek
         return articleDTO;
     }
 }

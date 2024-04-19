@@ -1,6 +1,8 @@
 package com.hotel.services.Blog;
 
+import com.hotel.dto.AdDTO;
 import com.hotel.dto.ArticleDTO;
+import com.hotel.entity.Ad;
 import com.hotel.entity.Article;
 import com.hotel.entity.User;
 import com.hotel.enums.UserRole;
@@ -85,5 +87,11 @@ public class BlogServiceImpl implements BlogService {
             return true;
         }
         return false;
+    }
+
+    // Metode untuk mencari iklan berdasarkan nama
+    public List<ArticleDTO> searchArticleByTitle(String title) {
+        // Menggunakan stream untuk memetakan setiap Ad menjadi AdDTO berdasarkan nama yang diberikan
+        return articleRepository.findAllByTitleContaining(title).stream().map(Article::getArticleDto).collect(Collectors.toList());
     }
 }

@@ -28,7 +28,10 @@ public class Reservation {
     private ReviewStatus reviewStatus;
 
     // Tanggal pemesanan
-    private Date bookDate;
+    private Date checkInDate;
+
+    // Tanggal check-out
+    private Date checkOutDate;
 
     // Hubungan dengan entitas User untuk pengguna yang membuat reservasi
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -55,7 +58,11 @@ public class Reservation {
         // Menetapkan nilai-nilai entitas Reservation ke objek ReservationDTO
         dto.setId(id);
         dto.setServiceName(ad.getServiceName());
-        dto.setBookDate(bookDate);
+        dto.setPrice(ad.getPrice());
+
+        dto.setCheckInDate(checkInDate);
+        // Tambahkan check-out date ke DTO
+        dto.setCheckOutDate(checkOutDate);
         dto.setReservationStatus(reservationStatus);
         dto.setReviewStatus(reviewStatus);
 
@@ -63,6 +70,9 @@ public class Reservation {
         dto.setAdId(ad.getId());
         dto.setCompanyId(company.getId());
         dto.setUserName(user.getName());
+
+
+
 
         // Mengembalikan objek ReservationDTO
         return dto;

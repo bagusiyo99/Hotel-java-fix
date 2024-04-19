@@ -1,5 +1,6 @@
 package com.hotel.services.Blog;
 
+import com.hotel.dto.AdDTO;
 import com.hotel.dto.ArticleDTO;
 
 import java.io.IOException;
@@ -14,4 +15,6 @@ public interface BlogService {
      boolean updateArticle(Long articleId, ArticleDTO articleDTO) throws IOException ;
 
     boolean deleteArticle(Long articleId) ;
+    List<ArticleDTO> searchArticleByTitle (String title);
+
 }
