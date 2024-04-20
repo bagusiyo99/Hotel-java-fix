@@ -70,6 +70,23 @@ public class ClientServiceImpl implements ClientService {
             reservation.setCheckInDate(reservationDTO.getCheckInDate());
             reservation.setCheckOutDate(reservationDTO.getCheckOutDate()); // Menetapkan checkOutDate
 
+            // Menghitung durasi pemesanan (dalam hari)
+            long duration = reservationDTO.getCheckOutDate().getTime() - reservationDTO.getCheckInDate().getTime();
+            long days = duration / (1000 * 60 * 60 * 24);
+
+            double totalPrice;
+            // Jika durasi pemesanan adalah 1 hari atau kurang, gunakan harga awal
+            if (days <= 0) {
+                totalPrice = optionalAd.get().getPrice();
+            } else {
+                // Jika durasi lebih dari 1 hari, hitung total harga
+                totalPrice = days * optionalAd.get().getPrice();
+            }
+
+            // Menetapkan total harga ke reservasi
+            reservation.setTotalPrice(totalPrice);
+
+
             reservation.setReservationStatus(ReservationStatus.PENDING);
             reservation.setUser(optionalUser.get());
 

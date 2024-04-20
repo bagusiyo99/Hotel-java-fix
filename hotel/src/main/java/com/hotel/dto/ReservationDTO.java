@@ -31,5 +31,6 @@ public class ReservationDTO {
     // Tanggal check-out
     private Date checkOutDate;
 
+    private Double totalPrice;;
 
 }
