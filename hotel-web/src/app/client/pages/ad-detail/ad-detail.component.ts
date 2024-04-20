@@ -15,7 +15,8 @@ export class AdDetailComponent implements OnInit {
   adId = this.activatedroute.snapshot.params['adId'];
   avatarUrl: any;
   ad: any;
-  
+    isSubmitting: boolean = false; // Flag untuk melacak status permintaan
+
   validateForm: FormGroup;
 
   constructor(
@@ -62,53 +63,108 @@ export class AdDetailComponent implements OnInit {
     return null;
   };
 
-  bookService() {
-  const checkInDate = this.validateForm.get(['checkInDate']).value;
-  const checkOutDate = this.validateForm.get(['checkOutDate']).value;
+  // Validasi untuk memastikan tanggal check-in tidak lebih awal dari hari ini
+  futureOrTodayValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const today = new Date();
+    const selectedDate = new Date(control.value);
 
-  // Pastikan checkOutDate dan checkInDate memiliki nilai dan dalam format yang benar
-  if (!checkInDate || !checkOutDate || !(checkInDate instanceof Date) || !(checkOutDate instanceof Date)) {
-    this.notification.error(
-      'ERROR',
-      'Tanggal Check-out atau Check-in tidak valid',
-      { nzDuration: 5000 }
-    );
-    return;
+    if (selectedDate < today) {
+      return { dateInvalid: true };
+    }
+
+    return null;
   }
 
-  // Menghitung durasi dalam milidetik dan kemudian mengonversinya ke hari
-  const durationInMilliseconds = checkOutDate.getTime() - checkInDate.getTime();
-  const durationInDays = durationInMilliseconds / (1000 * 60 * 60 * 24);
+ bookService() {
+    const checkInDate = this.validateForm.get(['checkInDate']).value;
+    const checkOutDate = this.validateForm.get(['checkOutDate']).value;
 
-  // Hitung total harga berdasarkan durasi dan harga per hari
-  const totalPrice = durationInDays * this.ad.price;
-
-  const bookServiceDto = {
-    checkInDate,
-    checkOutDate,
-    adId: this.adId,
-    userId: UserStorageService.getUserId(),
-    totalPrice  // Sertakan total harga dalam DTO
-  };
-
-  // Kirim DTO ke layanan booking
-  this.clientService.bookService(bookServiceDto).subscribe(
-    res => {
-      this.notification.success(
-        'SUCCESS',
-        'Booking berhasil',
-        { nzDuration: 5000 }
-      );
-      this.router.navigateByUrl('/client/bookings');
-    },
-    error => {
-      this.notification.error(
-        'ERROR',
-        error.error,
-        { nzDuration: 5000 }
-      );
+    // Validasi tanggal check-in
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set ke awal hari ini (untuk memeriksa hanya tanggal)
+    if (checkInDate < today) {
+        this.notification.error(
+            'ERROR',
+            'Tanggal Check-in harus mulai dari hari ini atau di masa depan.',
+            { nzDuration: 5000 }
+        );
+        return;
     }
-  );
+
+    // Validasi tanggal check-out
+    if (checkOutDate < checkInDate) {
+        this.notification.error(
+            'ERROR',
+            'Tanggal Check-out tidak boleh lebih awal dari tanggal Check-in.',
+            { nzDuration: 5000 }
+        );
+        return;
+    }
+
+    // Pastikan tanggal check-in dan check-out adalah objek Date yang valid
+    if (!(checkInDate instanceof Date) || !(checkOutDate instanceof Date)) {
+        this.notification.error(
+            'ERROR',
+            'Tanggal Check-out atau Check-in tidak valid',
+            { nzDuration: 5000 }
+        );
+        return;
+    }
+
+    // Menghitung durasi dalam milidetik dan kemudian mengonversinya ke hari
+    const durationInMilliseconds = checkOutDate.getTime() - checkInDate.getTime();
+    const durationInDays = durationInMilliseconds / (1000 * 60 * 60 * 24);
+
+    // Tentukan total harga berdasarkan durasi pemesanan
+    let totalPrice;
+    if (durationInDays < 1) {
+        totalPrice = this.ad.price; // Jika durasi < 1 hari, gunakan harga awal
+    } else {
+        totalPrice = durationInDays * this.ad.price; // Jika durasi >= 1 hari, hitung total harga
+    }
+
+    const bookServiceDto = {
+        checkInDate,
+        checkOutDate,
+        adId: this.adId,
+        userId: UserStorageService.getUserId(),
+        totalPrice
+    };
+
+    // Set flag `isSubmitting` ke true untuk menandai permintaan sedang berlangsung
+    this.isSubmitting = true;
+
+    // Kirim DTO ke layanan pemesanan
+    this.clientService.bookService(bookServiceDto).subscribe(
+        res => {
+            // Setelah permintaan berhasil, set flag `isSubmitting` ke false
+            this.isSubmitting = false;
+            this.notification.success(
+                'SUCCESS',
+                'Booking berhasil',
+                { nzDuration: 5000 }
+            );
+            this.router.navigateByUrl('/client/bookings');
+        },
+        error => {
+            // Jika terjadi kesalahan, set flag `isSubmitting` ke false
+            this.isSubmitting = false;
+            this.notification.error(
+                'ERROR',
+                error.error,
+                { nzDuration: 5000 }
+            );
+        }
+    );
 }
+
+  formatPrice(price: number): string {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(price);
+  }
 
 }

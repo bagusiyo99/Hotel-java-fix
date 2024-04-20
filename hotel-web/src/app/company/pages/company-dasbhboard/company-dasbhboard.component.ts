@@ -23,22 +23,30 @@ export class CompanyDasbhboardComponent {
     this.getAllAdBookings();
   }
 
-  getAllAdBookings() {
-this.companyService.getAllAdBookings().subscribe(res => {
-  // Ubah checkInDate dan checkOutDate ke objek Date
-  res.forEach(item => {
-    item.checkInDate = new Date(item.checkInDate);
-    item.checkOutDate = new Date(item.checkOutDate);
+ getAllAdBookings() {
+    this.companyService.getAllAdBookings().subscribe(res => {
+      // Ubah checkInDate dan checkOutDate ke objek Date
+      res.forEach(item => {
+        item.checkInDate = new Date(item.checkInDate);
+        item.checkOutDate = new Date(item.checkOutDate);
+        
+        // Menghitung durasi pemesanan dalam milidetik
+        const durationInMillis = item.checkOutDate - item.checkInDate;
+        const durationInDays = durationInMillis / (1000 * 60 * 60 * 24);
 
-    // Menghitung total harga berdasarkan harga dan durasi
-    const durationInDays = (item.checkOutDate - item.checkInDate) / (1000 * 60 * 60 * 24);
-    item.totalPrice = durationInDays * item.price;
-  });
+        // Menghitung total harga
+        if (durationInDays <= 0) {
+          // Jika durasi pemesanan adalah satu hari atau kurang, gunakan harga awal
+          item.totalPrice = item.price;
+        } else {
+          // Jika durasi lebih dari satu hari, hitung total harga berdasarkan harga dan durasi
+          item.totalPrice = durationInDays * item.price;
+        }
+      });
 
-  // Urutkan data berdasarkan checkInDate dalam urutan menurun
-  this.bookings = res.sort((a, b) => b.checkInDate - a.checkInDate);
-});
-
+      // Urutkan data berdasarkan checkInDate dalam urutan menurun (descending)
+      this.bookings = res.sort((a, b) => b.checkInDate - a.checkInDate);
+    });
   }
 
   changeBookingStatus(bookingId: number, status: string) {

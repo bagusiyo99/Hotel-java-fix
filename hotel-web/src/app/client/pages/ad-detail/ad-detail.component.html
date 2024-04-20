@@ -1,41 +1,57 @@
-<div class="container" *ngIf="ad">
-  <div class="row">
+<div class="container mt-4" *ngIf="ad">
+  <div class="row ">
 
-    <!-- Kartu Konten Detail View -->
-    <div class="col-md-8">
-      <div class="card detail-card">
-        <div class="img-container">
-          <img class="profile" [src]="avatarUrl" alt="Ad Image" />
+    <!-- Detail Konten -->
+    <div class="col-lg-9">
+      <div class="card ">
+        <div class="card-body">
+          <!-- Gambar Profil -->
+          <div class="d-flex align-items-center mb-3">
+            <img class="profile img-thumbnail rounded-circle me-3" [src]="avatarUrl" alt="Ad Image" style="width: 400px; height: 400px;">
+
+            <!-- Detail Konten -->
+            <div>
+              <h3 class="fw-bold text-dark mb-2">{{ ad.serviceName }}</h3>
+              <p class="text-muted mb-1">Harga: <span class="text-success">{{ formatPrice(ad.price) }}</span></p>
+              <p class="text-muted mb-1"><strong>Deskripsi:</strong> {{ ad.description }}</p>
+              <!-- <p class="text-muted mb-0"><strong>Nama Perusahaan:</strong> {{ ad.companyName }}</p> -->
+            </div>
+          </div>
+
+          <!-- Tombol Kembali -->
+          <button nz-button nzType="default" routerLink="/client/dashboard" class="btn-green mt-3">Kembali</button>
         </div>
-        <div class="text-container">
-          <h1 style="cursor:pointer; color: #000;">{{ ad.serviceName }}</h1>
-          <h4>Harga: {{ ad.price }}</h4>
-          <p class="description">Deskripsi: {{ ad.description }}</p>
-          <p class="description">Nama Perusahaan: {{ ad.companyName }}</p>
-        </div>
-        <button nzSize="small" nz-button nzType="primary" routerLink="/client/dashboard">Kembali</button>
       </div>
     </div>
 
-    <!-- Kartu Formulir Pemesanan -->
-    <div class="col-md-4">
-      <div class="card booking-card">
-        <h2>Book Booking</h2>
-        <form nz-form [formGroup]="validateForm">
-          <div nz-row>
-            <nz-form-label [nzSpan]="24" nzFor="checkInDate">Tanggal Check-In</nz-form-label>
-            <nz-form-control>
-              <nz-date-picker formControlName="checkInDate" name="checkInDate" id="checkInDate"></nz-date-picker>
-            </nz-form-control>
-          </div>
-          <div nz-row>
-            <nz-form-label [nzSpan]="24" nzFor="checkOutDate">Tanggal Check-Out</nz-form-label>
-            <nz-form-control>
-              <nz-date-picker formControlName="checkOutDate" name="checkOutDate" id="checkOutDate"></nz-date-picker>
-            </nz-form-control>
-          </div>
-          <button nz-button nzType="primary" [disabled]="validateForm.invalid" (click)="bookService()">Pesan Sekarang</button>
-        </form>
+    <!-- Formulir Pemesanan -->
+    <div class="col-lg-3">
+      <div class="card ">
+        <div class="card-body">
+          <h4 class="fw-bold text-dark mb-3">Form Pemesanan</h4>
+
+          <!-- Formulir -->
+          <form nz-form [formGroup]="validateForm" (ngSubmit)="bookService()">
+            <!-- Input Tanggal Check-In -->
+            <div class="mb-3">
+              <nz-form-label nzFor="checkInDate" nzRequired>Tanggal Check-In</nz-form-label>
+              <nz-form-control>
+                <nz-date-picker formControlName="checkInDate" id="checkInDate"></nz-date-picker>
+              </nz-form-control>
+            </div>
+
+            <!-- Input Tanggal Check-Out -->
+            <div class="mb-3">
+              <nz-form-label nzFor="checkOutDate" nzRequired>Tanggal Check-Out</nz-form-label>
+              <nz-form-control>
+                <nz-date-picker formControlName="checkOutDate" id="checkOutDate"></nz-date-picker>
+              </nz-form-control>
+            </div>
+
+            <!-- Tombol Pesan Sekarang -->
+            <button nz-button nzType="primary" [disabled]="validateForm.invalid || isSubmitting" class="btn-green">Pesan Sekarang</button>
+          </form>
+        </div>
       </div>
     </div>
 

@@ -38,17 +38,46 @@ export class MyBookingsComponent {
     );
   }
 
-  processBookingsData(bookings: any[]) {
+  // processBookingsData(bookings: any[]) {
+  //   this.bookedServices = bookings.map(item => {
+  //     item.checkInDate = new Date(item.checkInDate);
+  //     item.checkOutDate = item.checkOutDate ? new Date(item.checkOutDate) : null;
+      
+  //     // Hitung total harga jika checkOutDate tersedia
+  //     if (item.checkOutDate) {
+  //       const durationInMilliseconds = item.checkOutDate.getTime() - item.checkInDate.getTime();
+  //       const durationInDays = durationInMilliseconds / (1000 * 60 * 60 * 24);
+  //       item.totalPrice = durationInDays * item.price;
+  //     } else {
+  //       console.error('Check-out date is missing or invalid:', item);
+  //       item.totalPrice = 0;
+  //     }
+      
+  //     return item;
+  //   }).sort((a, b) => b.checkInDate.getTime() - a.checkInDate.getTime());
+  // }
+
+   processBookingsData(bookings: any[]) {
     this.bookedServices = bookings.map(item => {
       item.checkInDate = new Date(item.checkInDate);
       item.checkOutDate = item.checkOutDate ? new Date(item.checkOutDate) : null;
       
-      // Hitung total harga jika checkOutDate tersedia
+      // Hitung total harga jika check-out date tersedia
       if (item.checkOutDate) {
+        // Menghitung durasi pemesanan dalam milidetik
         const durationInMilliseconds = item.checkOutDate.getTime() - item.checkInDate.getTime();
         const durationInDays = durationInMilliseconds / (1000 * 60 * 60 * 24);
-        item.totalPrice = durationInDays * item.price;
+
+        // Menghitung total harga
+        if (durationInDays <= 0) {
+          // Jika durasi pemesanan adalah satu hari atau kurang, gunakan harga awal
+          item.totalPrice = item.price;
+        } else {
+          // Jika durasi lebih dari satu hari, hitung total harga berdasarkan harga dan durasi
+          item.totalPrice = durationInDays * item.price;
+        }
       } else {
+        // Jika tanggal check-out tidak tersedia, tetapkan total harga ke 0
         console.error('Check-out date is missing or invalid:', item);
         item.totalPrice = 0;
       }
