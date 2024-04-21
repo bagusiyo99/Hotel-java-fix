@@ -6,7 +6,10 @@
       <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Check-in</th>
       <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Check-out</th>
       <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Total Harga</th>
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Pajak</th>
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Total Pembayaran</th>
       <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Status</th>
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Kwitansi</th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +19,8 @@
       <td style="padding: 10px;">{{ booking.checkInDate ? (booking.checkInDate | date: 'd MMMM yyyy') : '-' }}</td>
       <td style="padding: 10px;">{{ booking.checkOutDate ? (booking.checkOutDate | date: 'd MMMM yyyy') : '-' }}</td>
       <td style="font-weight: 600; padding: 10px;">{{ formatPrice(booking.totalPrice) }}</td>
+      <td style="font-weight: 600; padding: 10px;">{{ formatPrice(booking.tax) }}</td>
+      <td style="font-weight: 600; padding: 10px;">{{ formatPrice(booking.totalPayment) }}</td>
       <td style="font-weight: 600; padding: 10px;">
         <ng-container *ngIf="booking.reservationStatus === 'APPROVED'">
           <span style="color: green;">Disetujui</span>
@@ -26,6 +31,14 @@
         <ng-container *ngIf="booking.reservationStatus === 'PENDING'">
           <span style="color: orange;">Pending</span>
         </ng-container>
+      </td>
+
+      <td>
+
+
+        <span *ngIf="booking.reservationStatus === 'APPROVED'">
+          <button nzSize="small" nz-button nzType="primary" (click)="downloadInvoice(booking)">Download Kwitansi</button>
+        </span>
       </td>
     </tr>
   </tbody>

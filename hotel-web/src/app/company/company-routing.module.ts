@@ -5,6 +5,7 @@ import { CompanyDasbhboardComponent } from './pages/company-dasbhboard/company-d
 import { CreateAdComponent } from './pages/create-ad/create-ad.component';
 import { AllAdsComponent } from './pages/all-ads/all-ads.component';
 import { UpdateAdComponent } from './pages/update-ad/update-ad.component';
+import { InvoiceCompanyComponent } from './pages/invoice-company/invoice-company.component';
 
 
 const routes: Routes = [
@@ -13,11 +14,9 @@ const routes: Routes = [
   { path: 'ad', component: CreateAdComponent },
   { path: 'ads', component: AllAdsComponent },
   { path: 'update/:id', component: UpdateAdComponent },
+  { path: 'invoice-company', component: InvoiceCompanyComponent },
 
 
-    // { path: 'blog', component: CreateBlogComponent },
-    // { path: 'blogs', component: BlogComponent },
-    // { path: 'update/:id', component: UpdateBlogComponent },
 
 ];
 
