@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { CompanyService } from '../../services/company.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-company-dasbhboard',
@@ -366,7 +367,55 @@ downloadInvoice(booking: any): void {
   newWindow.document.write(invoiceContent);
 }
 
-  
+  getApprovedTotalPayment(): number {
+  let approvedTotalPayment = 0;
+  this.bookings.forEach(booking => {
+    if (booking.reservationStatus === 'APPROVED') {
+      approvedTotalPayment += booking.totalPayment;
+    }
+  });
+  return approvedTotalPayment;
+}
+
+
+exportToExcel(): void {
+  // Filter data hanya untuk pemesanan yang disetujui
+  const approvedBookings = this.bookings.filter(booking => booking.reservationStatus === 'APPROVED');
+
+  // Data yang akan diekspor
+  const data = approvedBookings.map(booking => ({
+    'Nama Client': booking.userName,
+    'Ruangan': booking.serviceName,
+    'Harga': this.formatPrice(booking.price),
+    'Tanggal Booking': new Date(booking.checkInDate).toLocaleDateString('en-US'),
+    'Tanggal Checkout': new Date(booking.checkOutDate).toLocaleDateString('en-US'),
+    'Total Harga': this.formatPrice(booking.totalPrice),
+    'Pajak 11%': this.formatPrice(booking.tax),
+    'Total Pembayaran + Pajak': this.formatPrice(booking.totalPayment)
+  }));
+
+  // Konversi data ke format yang sesuai untuk file Excel
+  const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+  const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+
+  // Buat file Excel
+  const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  this.saveAsExcelFile(excelBuffer, 'Pendapatan-hotel');
+}
+
+saveAsExcelFile(buffer: any, fileName: string): void {
+  const data: Blob = new Blob([buffer], { type: 'application/octet-stream' });
+  const url: string = window.URL.createObjectURL(data);
+  const a: HTMLAnchorElement = document.createElement('a');
+  a.href = url;
+  a.download = fileName + '.xlsx';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  window.URL.revokeObjectURL(url);
+}
+
+
   
 }
 
