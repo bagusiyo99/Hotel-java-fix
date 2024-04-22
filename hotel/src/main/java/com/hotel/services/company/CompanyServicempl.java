@@ -102,6 +102,15 @@ public class CompanyServicempl implements CompanyService {
         return false;
     }
 
+    public boolean deleteBooking(Long bookingId) {
+        Optional<Reservation> optionalReservation = reservationRepository.findById(bookingId);
+        if (optionalReservation.isPresent()) {
+            reservationRepository.delete(optionalReservation.get());
+            return true;
+        }
+        return false;
+    }
+
     // Metode untuk mendapatkan semua pemesanan berdasarkan ID perusahaan
     public List<ReservationDTO> getAllAdBookings(Long companyId) {
         return reservationRepository.findAllByCompanyId(companyId)

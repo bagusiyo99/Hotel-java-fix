@@ -98,6 +98,18 @@ public class CompanyController {
         }
     }
 
+    @DeleteMapping("/booking/{bookingId}")
+    public ResponseEntity<?> deleteBooking(@PathVariable Long bookingId) {
+        // Menghapus reservasi menggunakan CompanyService
+        boolean success = companyService.deleteBooking(bookingId);
+        // Jika berhasil, kembalikan status OK, jika tidak, kembalikan status NOT FOUND
+        if (success) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
     @GetMapping("/search/{name}")
     public ResponseEntity<?> searchAdByService(@PathVariable String name) {

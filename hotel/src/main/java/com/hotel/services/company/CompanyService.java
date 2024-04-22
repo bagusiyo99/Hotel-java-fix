@@ -23,4 +23,5 @@ public interface CompanyService {
 
     List<AdDTO> searchAdByName (String name);
 
+    boolean deleteBooking(Long bookingId);
 }

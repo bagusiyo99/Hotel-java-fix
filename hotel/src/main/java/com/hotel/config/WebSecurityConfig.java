@@ -50,6 +50,7 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/company/ad/**").permitAll()
                 // Mengizinkan akses DELETE ke endpoint tertentu tanpa otentikasi
                 .requestMatchers(HttpMethod.DELETE, "/api/company/ad/**").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/api/company/booking/{bookingId}").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/company/search/{name}").permitAll()
 
 
