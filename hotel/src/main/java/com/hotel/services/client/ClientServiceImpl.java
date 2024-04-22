@@ -58,6 +58,51 @@ public class ClientServiceImpl implements ClientService {
     }
 
     // Metode untuk memesan layanan
+//    public boolean bookService(ReservationDTO reservationDTO) {
+//        // Mengambil Ad dan User berdasarkan ID yang diberikan
+//        Optional<Ad> optionalAd = adRepository.findById(reservationDTO.getAdId());
+//        Optional<User> optionalUser = userRepository.findById(reservationDTO.getUserId());
+//
+//        // Memeriksa apakah Ad dan User ada
+//        if (optionalAd.isPresent() && optionalUser.isPresent()) {
+//            // Membuat reservasi baru
+//            Reservation reservation = new Reservation();
+//            reservation.setCheckInDate(reservationDTO.getCheckInDate());
+//            reservation.setCheckOutDate(reservationDTO.getCheckOutDate()); // Menetapkan checkOutDate
+//
+//            // Menghitung durasi pemesanan (dalam hari)
+//            long duration = reservationDTO.getCheckOutDate().getTime() - reservationDTO.getCheckInDate().getTime();
+//            long days = duration / (1000 * 60 * 60 * 24);
+//
+//            double totalPrice;
+//            // Jika durasi pemesanan adalah 1 hari atau kurang, gunakan harga awal
+//            if (days <= 0) {
+//                totalPrice = optionalAd.get().getPrice();
+//            } else {
+//                // Jika durasi lebih dari 1 hari, hitung total harga
+//                totalPrice = days * optionalAd.get().getPrice();
+//            }
+//
+//            // Menetapkan total harga ke reservasi
+//            reservation.setTotalPrice(totalPrice);
+//
+//
+//            reservation.setReservationStatus(ReservationStatus.PENDING);
+//            reservation.setUser(optionalUser.get());
+//
+//            // Menetapkan Ad dan perusahaan (company) ke reservasi
+//            reservation.setAd(optionalAd.get());
+//            reservation.setCompany(optionalAd.get().getUser());
+//            reservation.setReviewStatus(ReviewStatus.FALSE);
+//
+//            // Menyimpan reservasi dan mengembalikan true
+//            reservationRepository.save(reservation);
+//            return true;
+//        }
+//        // Mengembalikan false jika reservasi gagal
+//        return false;
+//    }
+
     public boolean bookService(ReservationDTO reservationDTO) {
         // Mengambil Ad dan User berdasarkan ID yang diberikan
         Optional<Ad> optionalAd = adRepository.findById(reservationDTO.getAdId());
@@ -68,7 +113,7 @@ public class ClientServiceImpl implements ClientService {
             // Membuat reservasi baru
             Reservation reservation = new Reservation();
             reservation.setCheckInDate(reservationDTO.getCheckInDate());
-            reservation.setCheckOutDate(reservationDTO.getCheckOutDate()); // Menetapkan checkOutDate
+            reservation.setCheckOutDate(reservationDTO.getCheckOutDate());
 
             // Menghitung durasi pemesanan (dalam hari)
             long duration = reservationDTO.getCheckOutDate().getTime() - reservationDTO.getCheckInDate().getTime();
@@ -83,14 +128,20 @@ public class ClientServiceImpl implements ClientService {
                 totalPrice = days * optionalAd.get().getPrice();
             }
 
-            // Menetapkan total harga ke reservasi
+            // Hitung pajak
+            double tax = totalPrice * 0.11;
+
+            // Hitung total pembayaran (total harga ditambah pajak)
+            double totalPayment = totalPrice + tax;
+
+            // Set nilai total harga, pajak, dan total pembayaran ke reservasi
             reservation.setTotalPrice(totalPrice);
+            reservation.setTax(tax);
+            reservation.setTotalPayment(totalPayment);
 
-
+            // Set status reservasi, user, ad, dan company
             reservation.setReservationStatus(ReservationStatus.PENDING);
             reservation.setUser(optionalUser.get());
-
-            // Menetapkan Ad dan perusahaan (company) ke reservasi
             reservation.setAd(optionalAd.get());
             reservation.setCompany(optionalAd.get().getUser());
             reservation.setReviewStatus(ReviewStatus.FALSE);
@@ -102,6 +153,9 @@ public class ClientServiceImpl implements ClientService {
         // Mengembalikan false jika reservasi gagal
         return false;
     }
+
+
+
 
     // Metode untuk mendapatkan detail iklan berdasarkan ID iklan
     public AdDetailsForClientDto getAdDetailsByAdId(Long adId) {

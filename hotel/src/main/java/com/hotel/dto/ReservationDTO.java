@@ -32,5 +32,9 @@ public class ReservationDTO {
     private Date checkOutDate;
 
     private Double totalPrice;;
+    private Double tax;
+
+    private Double totalPayment;
+
 
 }

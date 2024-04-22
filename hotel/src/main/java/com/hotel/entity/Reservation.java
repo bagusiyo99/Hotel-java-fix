@@ -33,7 +33,11 @@ public class Reservation {
     // Tanggal check-out
     private Date checkOutDate;
     private Double totalPrice;;
+    // Properti lainnya
 
+    private Double tax;
+
+    private Double totalPayment;
 
     // Hubungan dengan entitas User untuk pengguna yang membuat reservasi
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -65,6 +69,8 @@ public class Reservation {
         dto.setCheckInDate(checkInDate);
         // Tambahkan check-out date ke DTO
         dto.setCheckOutDate(checkOutDate);
+        dto.setTax(tax);
+        dto.setTotalPayment(totalPayment);
 
         dto.setTotalPrice(totalPrice);
         dto.setReservationStatus(reservationStatus);
@@ -74,6 +80,7 @@ public class Reservation {
         dto.setAdId(ad.getId());
         dto.setCompanyId(company.getId());
         dto.setUserName(user.getName());
+
 
 
 
