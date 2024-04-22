@@ -13,6 +13,7 @@ import { UpdateAdComponent } from './pages/update-ad/update-ad.component';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { FooterCompanyComponent } from '../footer-company/footer-company.component';
 import { InvoiceCompanyComponent } from './pages/invoice-company/invoice-company.component';
+import { PesananComponent } from './pages/pesanan/pesanan.component';
 
 
 
@@ -25,6 +26,7 @@ import { InvoiceCompanyComponent } from './pages/invoice-company/invoice-company
     UpdateAdComponent,
 FooterCompanyComponent,
 InvoiceCompanyComponent,
+PesananComponent,
     
   ],
   imports: [

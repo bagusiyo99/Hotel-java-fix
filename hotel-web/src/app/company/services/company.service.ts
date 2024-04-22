@@ -64,6 +64,11 @@ export class CompanyService {
   }
 
 
+    deleteBooking(bookingId: any): Observable<any> {
+    return this.http.delete(BASIC_URL + `api/company/booking/${bookingId}`, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
 
 
     getAllAdBookings(): Observable<any> {

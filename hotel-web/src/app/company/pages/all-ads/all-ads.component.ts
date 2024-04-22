@@ -17,7 +17,6 @@ export class AllAdsComponent implements OnInit {
   totalAds: number = 0;
   totalAdsPages: number = 0;
   validateForm!: FormGroup;
-totalRevenue: number = 0;
 
   constructor(
     private companyService: CompanyService,
@@ -40,9 +39,6 @@ totalRevenue: number = 0;
         this.totalAds = this.ads.length;
         this.totalAdsPages = Math.ceil(this.totalAds / this.adsPerPage);
         this.updatePagedAds();
-        // Menghitung total pendapatan
-      this.calculateTotalRevenue();
-
       },
       (error) => {
         console.error('Failed to load ads:', error);
@@ -139,16 +135,4 @@ searchAdByName() {
     const end = start + this.adsPerPage;
     this.pagedAds = this.ads.slice(start, end);
   }
-
-  calculateTotalRevenue() {
-  this.totalRevenue = this.ads.reduce((total, ad) => {
-    // Hanya menghitung pendapatan dari pembayaran yang disetujui
-    if (ad.status === 'approved') {
-      return total + ad.price;
-    } else {
-      return total;
-    }
-  }, 0);
-}
-
 }

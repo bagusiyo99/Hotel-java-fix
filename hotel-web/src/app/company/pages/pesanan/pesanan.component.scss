@@ -1,0 +1,33 @@
+// .heading {
+//   font-weight: bolder;
+//   color: green;
+// }
+
+.menu-inner {
+  margin: 50px 50px;
+}
+
+.approved-total {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  /* Pusatkan teks */
+}
+
+.total-label {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.total-amount {
+  font-size: 24px;
+  color: #1ab394;
+  margin: 0 auto;
+  /* Pusatkan horizontal */
+  display: inline-block;
+  /* Gunakan inline-block agar bisa menerapkan margin auto */
+}

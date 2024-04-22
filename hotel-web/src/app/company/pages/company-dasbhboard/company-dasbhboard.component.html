@@ -1,87 +1,27 @@
-<div class="approved-total">
-  <p class="total-label">Total Pendapatan dari Pemesanan yang Disetujui:</p>
-  <p class="total-amount">{{ formatPrice(getApprovedTotalPayment()) }}</p>
-</div>
+<div class="container">
+  <h2 class="text-center mb-4 mt-5">Laporan Hotel</h2>
 
+  <!-- Kartu Informasi Total Pendapatan -->
+  <div class="card bg-primary text-white mx-auto mb-4" style="max-width: 30rem;">
+    <div class="card-body">
+      <h5 class="card-title">Total Pendapatan</h5>
+      <p class="card-text">{{ formatPrice(totalPendapatan) }}</p>
+    </div>
+  </div>
 
+  <!-- Kartu Informasi Total Pajak -->
+  <div class="card bg-success text-white mx-auto mb-4" style="max-width: 30rem;">
+    <div class="card-body">
+      <h5 class="card-title">Total Pajak</h5>
+      <p class="card-text">{{ formatPrice(totalPajak) }}</p>
+    </div>
+  </div>
 
-<div class="menu-inner py-1 mt-4">
-  <div class="row">
-    <div class="col-12">
-
-      <div class="card">
-
-        <div class="card-body">
-          <div class="d-flex justify-content-start align-content-center mb-3">
-            <button class="btn btn-success" (click)="exportToExcel()">Export Excel </button>
-          </div>
-          <table class="table table-bordered text-center" id="data">
-            <thead>
-              <tr class="btn-secondary">
-                <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;">Nama Client</th>
-                <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;">Ruangan</th>
-                <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;">Harga</th>
-                <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;">Tanggal Booking</th>
-                <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;">Tanggal Checkout</th>
-                <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;">Total Harga</th>
-                <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;">Pajak 11%</th>
-                <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;">Total Pembayaran + Pajak</th>
-                <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;">Status</th>
-                <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;">Aksi</th>
-              </tr>
-            </thead>
-
-
-            <tbody>
-              <tr *ngFor="let booking of bookings" style="border-color: black; text-transform: uppercase;">
-                <td style="font-weight: bold; border-color: black;">{{ booking.userName }}</td>
-                <td style="font-weight: bold; border-color: black;">{{ booking.serviceName }}</td>
-                <td style="font-weight: bold; border-color: black;">{{ formatPrice(booking.price) }}</td>
-                <td style="border-color: black;">{{ booking.checkInDate | date : 'd MMMM yyyy' }}</td>
-                <td style="border-color: black;">{{ booking.checkOutDate | date : 'd MMMM yyyy' }}</td>
-                <td style="font-weight: 600; padding: 10px;">{{ formatPrice(booking.totalPrice) }}</td>
-                <td style="font-weight: 600; padding: 10px;">{{ formatPrice(booking.tax) }}</td>
-                <td style="font-weight: 600; padding: 10px;">{{ formatPrice(booking.totalPayment) }}</td>
-
-                <!-- Kolom Status -->
-                <td style="font-weight: bold; border-color: black;">
-                  <ng-container *ngIf="booking.reservationStatus === 'APPROVED'">
-                    <span style="color: green;">Disetujui</span>
-                  </ng-container>
-                  <ng-container *ngIf="booking.reservationStatus === 'REJECTED'">
-                    <span style="color: red;">Kamar atau Ruangan Penuh</span>
-                  </ng-container>
-                  <ng-container *ngIf="booking.reservationStatus === 'PENDING'">
-                    <span style="color: orange;">Pending</span>
-                  </ng-container>
-                </td>
-
-                <!-- Kolom Aksi -->
-                <!-- <td style="border-color: black;">
-                  <span *ngIf="booking.reservationStatus === 'PENDING'">
-                    <button nzSize="small" nz-button nzType="primary" style="margin-bottom: 10px;" (click)="changeBookingStatus(booking.id, 'APPROVE')">
-                      TERIMA
-                    </button>
-                    <button nzSize="small" nz-button nzType="primary" nzDanger (click)="changeBookingStatus(booking.id, 'REJECTED')">
-                      TOLAK
-                    </button>
-                  </span>
-                </td> -->
-                <td>
-                  <span *ngIf="booking.reservationStatus === 'PENDING'" class="d-flex flex-column align-items-center mt-2">
-                    <button nzSize="small" nz-button nzType="primary" class="mr-2" style="margin-bottom: 15px;" (click)="changeBookingStatus(booking.id, 'APPROVE')">TERIMA</button>
-                    <button nzSize="small" nz-button nzType="primary" nzDanger (click)="changeBookingStatus(booking.id, 'REJECTED')">TOLAK</button>
-                  </span>
-
-                  <span *ngIf="booking.reservationStatus === 'APPROVED'">
-                    <button nzSize="small" nz-button nzType="primary" (click)="downloadInvoice(booking)">Download Kwitansi</button>
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+  <!-- Kartu Informasi Room Terbanyak Dipesan -->
+  <div class="card bg-info text-white mx-auto mb-4" style="max-width: 30rem;">
+    <div class="card-body">
+      <h5 class="card-title">Room Terbanyak Dipesan</h5>
+      <p class="card-text">{{ roomTerbanyak }}</p>
     </div>
   </div>
 </div>

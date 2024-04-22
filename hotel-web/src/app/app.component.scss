@@ -9,3 +9,13 @@
 .btn-sm {
   margin-left: 5px;
 }
+
+.nav-item.active .nav-link {
+  background-color: rgb(215, 163, 50);
+  color: black;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
