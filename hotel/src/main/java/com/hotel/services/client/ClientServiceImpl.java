@@ -103,6 +103,7 @@ public class ClientServiceImpl implements ClientService {
 //        return false;
 //    }
 
+    // Metode untuk memesan layanan
     public boolean bookService(ReservationDTO reservationDTO) {
         // Mengambil Ad dan User berdasarkan ID yang diberikan
         Optional<Ad> optionalAd = adRepository.findById(reservationDTO.getAdId());

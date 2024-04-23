@@ -1,12 +1,13 @@
 package com.hotel.services.company;
 
 import com.hotel.dto.AdDTO;
+import com.hotel.dto.ArticleDTO;
+import com.hotel.dto.ContactDTO;
 import com.hotel.dto.ReservationDTO;
-import com.hotel.entity.Ad;
-import com.hotel.entity.Reservation;
-import com.hotel.entity.User;
+import com.hotel.entity.*;
 import com.hotel.enums.ReservationStatus;
 import com.hotel.repository.AdRepository;
+import com.hotel.repository.ContactRepository;
 import com.hotel.repository.ReservationRepository;
 import com.hotel.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class CompanyServicempl implements CompanyService {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Autowired
+    private ContactRepository contactRepository;
+
     // Metode untuk memposting iklan baru
     public boolean postAd(Long userId, AdDTO adDTO) throws IOException {
         Optional<User> optionalUser = userRepository.findById(userId);
@@ -49,6 +53,7 @@ public class CompanyServicempl implements CompanyService {
         }
         return false;
     }
+
 
 
     // Metode untuk mencari iklan berdasarkan nama
@@ -131,5 +136,12 @@ public class CompanyServicempl implements CompanyService {
             return true;
         }
         return false;
+    }
+
+
+
+    public List<ContactDTO> getAllContact () {
+        // Menggunakan stream untuk memetakan setiap Ad menjadi AdDTO
+        return contactRepository.findAll().stream().map(Contact::getContactDto).collect(Collectors.toList());
     }
 }

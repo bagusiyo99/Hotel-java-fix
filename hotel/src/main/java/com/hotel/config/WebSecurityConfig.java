@@ -52,6 +52,7 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/api/company/ad/**").permitAll()
                 .requestMatchers(HttpMethod.DELETE, "/api/company/booking/{bookingId}").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/company/search/{name}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/company/contacts/**").permitAll()
 
 
                 // Mengizinkan akses GET ke endpoint /api/client/ads/** tanpa otentikasi
@@ -84,6 +85,23 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/blog/search/{title}").permitAll()
 
                 .requestMatchers(HttpMethod.GET, "/api/client/articles/**").permitAll()
+
+                // Mengizinkan akses POST ke endpoint tertentu tanpa otentikasi
+                .requestMatchers(HttpMethod.POST, "/api/contact/contact/**").permitAll()
+                // Mengizinkan akses GET ke endpoint tertentu tanpa otentikasi
+                .requestMatchers(HttpMethod.GET, "/api/contact/contacts/**").permitAll()
+                // Mengizinkan akses PUT ke endpoint tertentu tanpa otentikasi
+                // Mengizinkan akses GET ke endpoint tertentu tanpa otentikasi
+                .requestMatchers(HttpMethod.GET, "/api/contact/contact/**").permitAll()
+                // Mengizinkan akses DELETE ke endpoint tertentu tanpa otentikasi
+
+
+                .requestMatchers(HttpMethod.GET, "/api/contact/search/{name}").permitAll()
+
+
+
+
+
 
                 // Mengatur kebijakan manajemen sesi menjadi stateless (tanpa penyimpanan sesi)
                 .and()

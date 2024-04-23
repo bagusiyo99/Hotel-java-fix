@@ -1,6 +1,7 @@
 package com.hotel.services.company;
 
 import com.hotel.dto.AdDTO;
+import com.hotel.dto.ContactDTO;
 import com.hotel.dto.ReservationDTO;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ public interface CompanyService {
     boolean deleteAd(Long adId);
 
     List<ReservationDTO> getAllAdBookings(Long companyId);
-
+    List<ContactDTO> getAllContact();
     boolean changeBookingStatus (Long bookingId, String status);
 
     List<AdDTO> searchAdByName (String name);

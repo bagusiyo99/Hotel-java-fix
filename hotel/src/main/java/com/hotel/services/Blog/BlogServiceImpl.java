@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,7 +37,7 @@ public class BlogServiceImpl implements BlogService {
                 article.setDescription(articleDTO.getDescription());
                 article.setImg(articleDTO.getImg().getBytes());
                 article.setUser(user);
-
+                article.setCreatedAt(new Date());
                 articleRepository.save(article);
                 return true;
             }

@@ -1,8 +1,6 @@
 package com.hotel.services.contact;
 
-import com.hotel.dto.ArticleDTO;
 import com.hotel.dto.ContactDTO;
-import com.hotel.entity.Article;
 import com.hotel.entity.Contact;
 import com.hotel.entity.User;
 import com.hotel.enums.UserRole;
@@ -13,10 +11,13 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-public class ContactServicempl {
+public class ContactServiceImpl implements ContactService {
+
 
     @Autowired
     private UserRepository userRepository;
@@ -24,8 +25,8 @@ public class ContactServicempl {
     @Autowired
     private ContactRepository contactRepository;
 
-    @Autowired
-    public boolean postArticle(Long userId, ContactDTO contactDTO) throws IOException {
+    @Override
+    public boolean postContact (Long userId, ContactDTO contactDTO) throws IOException {
         // Validasi peran pengguna
         Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalUser.isPresent()) {
@@ -45,4 +46,30 @@ public class ContactServicempl {
         }
         return false; // Mengembalikan false jika pengguna tidak memiliki peran COMPANY
     }
+
+
+
+    @Override
+    public List<ContactDTO> getAllContact(Long userId) {
+        return contactRepository.findByUserId(userId)
+                .stream()
+                .map(Contact::getContactDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ContactDTO getContactById(Long contactId) {
+        Optional<Contact> optionalContact = contactRepository.findById(contactId);
+        if (optionalContact.isPresent()) {
+            return optionalContact.get().getContactDto();
+        }
+        return null;
+    }
+
+
+    public List<ContactDTO> searchContactByName(String name) {
+        return contactRepository.findAllByNameContaining(name).stream().map(Contact::getContactDto).collect(Collectors.toList());
+    }
+
+
 }

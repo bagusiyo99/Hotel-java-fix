@@ -42,7 +42,7 @@ public class Article {
         articleDTO.setId(id);
         articleDTO.setTitle(title);
         articleDTO.setDescription(description);
-
+        articleDTO.setCreatedAt(createdAt);
         articleDTO.setReturnedImg(img);
         articleDTO.setCompanyName(user.getName()); // Tambahkan nama perusahaan ke DTO
 

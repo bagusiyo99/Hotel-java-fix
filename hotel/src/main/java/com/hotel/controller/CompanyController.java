@@ -4,6 +4,7 @@ import com.hotel.dto.AdDTO;
 import com.hotel.dto.ReservationDTO;
 import com.hotel.entity.Reservation;
 import com.hotel.services.company.CompanyService;
+import com.hotel.services.contact.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,9 @@ public class CompanyController {
 
     @Autowired
     private CompanyService companyService;
+
+    @Autowired
+    private ContactService contactService;
 
     // Metode untuk memposting iklan
     @PostMapping("/ad/{userId}")
@@ -116,4 +120,11 @@ public class CompanyController {
         // Mencari iklan menggunakan ClientService dan mengembalikan hasil pencarian
         return ResponseEntity.ok(companyService.searchAdByName(name));
     }
+
+
+    @GetMapping("/contacts")
+    public ResponseEntity<?> getAllContact() {
+        return ResponseEntity.ok(companyService.getAllContact());
+    }
+
 }

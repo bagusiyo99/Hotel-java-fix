@@ -3,6 +3,8 @@ package com.hotel.dto;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
+
 @Data
 public class ArticleDTO {
     private Long id;
@@ -12,7 +14,7 @@ public class ArticleDTO {
 
     private byte[] returnedImg;  // Array byte untuk menyimpan gambar yang telah diambil kembali
     private Double price; // Tambahkan properti price
-
+    private Date createdAt;
     private Long userId;
     private String userName;
 
