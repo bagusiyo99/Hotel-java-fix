@@ -14,6 +14,7 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { FooterCompanyComponent } from '../footer-company/footer-company.component';
 import { InvoiceCompanyComponent } from './pages/invoice-company/invoice-company.component';
 import { PesananComponent } from './pages/pesanan/pesanan.component';
+import { ContactsComponent } from './pages/contacts/contacts.component';
 
 
 
@@ -27,6 +28,7 @@ import { PesananComponent } from './pages/pesanan/pesanan.component';
 FooterCompanyComponent,
 InvoiceCompanyComponent,
 PesananComponent,
+ContactsComponent,
     
   ],
   imports: [

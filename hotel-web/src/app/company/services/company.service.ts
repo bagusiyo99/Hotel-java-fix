@@ -45,6 +45,18 @@ export class CompanyService {
     
   }
 
+  
+  getAllContact(): Observable<any> {
+    return this.http.get(BASIC_URL + `api/company/contacts`, {
+      headers: this.createAuthorizationHeader()
+    }).pipe(
+      catchError(error => {
+        return throwError(error);
+      })
+    );
+    
+  }
+
   //02.07
 
   getAdById(adId: any): Observable<any> {

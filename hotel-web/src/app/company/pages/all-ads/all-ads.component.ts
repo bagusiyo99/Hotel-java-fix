@@ -32,19 +32,37 @@ export class AllAdsComponent implements OnInit {
     this.getAllAdsByUserId();
   }
 
+  // getAllAdsByUserId() {
+  //   this.companyService.getAllAdsByUserid().subscribe(
+  //     (res) => {
+  //       this.ads = res;
+  //       this.totalAds = this.ads.length;
+  //       this.totalAdsPages = Math.ceil(this.totalAds / this.adsPerPage);
+  //       this.updatePagedAds();
+  //     },
+  //     (error) => {
+  //       console.error('Failed to load ads:', error);
+  //     }
+  //   );
+  // }
+
   getAllAdsByUserId() {
-    this.companyService.getAllAdsByUserid().subscribe(
-      (res) => {
-        this.ads = res;
-        this.totalAds = this.ads.length;
-        this.totalAdsPages = Math.ceil(this.totalAds / this.adsPerPage);
-        this.updatePagedAds();
-      },
-      (error) => {
-        console.error('Failed to load ads:', error);
-      }
-    );
-  }
+  this.companyService.getAllAdsByUserid().subscribe(
+    (res) => {
+      // Urutkan postingan berdasarkan tanggal pembuatan secara terbalik
+      this.ads = res.sort((a, b) => {
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      });
+      this.totalAds = this.ads.length;
+      this.totalAdsPages = Math.ceil(this.totalAds / this.adsPerPage);
+      this.updatePagedAds();
+    },
+    (error) => {
+      console.error('Failed to load ads:', error);
+    }
+  );
+}
+
 
   updateImg(img: string): string {
     return `data:image/jpeg;base64,${img}`;

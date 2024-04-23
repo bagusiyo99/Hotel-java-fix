@@ -1,0 +1,43 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+      <div class="card custom-card">
+        <div class="card-header bg-success text-white">
+          <h2 class="text-center">Kritik dan Saran </h2>
+        </div>
+
+        <div class="card-body form-container">
+          <div class="row">
+            <div class="col-md-4 d-flex align-items-center">
+              <img src="/assets/s.png" class="img-fluid" alt="Gambar Kontak">
+            </div>
+            <div class="col-md-8">
+              <form nz-form [formGroup]="validateForm" (ngSubmit)="postContact()">
+
+                <div class="form-group mb-3">
+                  <label for="name">Nama</label>
+                  <input type="text" class="form-control" id="name" placeholder="Masukkan Nama" formControlName="name">
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="address">Alamat</label>
+                  <textarea class="form-control" id="address" rows="3" placeholder="Masukkan Alamat" formControlName="address"></textarea>
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="description">Deskripsi </label>
+                  <textarea class="form-control" id="description" rows="3" placeholder="Masukkan Deskripsi " formControlName="description"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success btn-block">Kirim</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

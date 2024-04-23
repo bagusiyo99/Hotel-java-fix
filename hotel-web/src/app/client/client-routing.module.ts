@@ -5,13 +5,15 @@ import { ClientComponent } from './client.component';
 import { AdDetailComponent } from './pages/ad-detail/ad-detail.component';
 import { MyBookingsComponent } from './pages/my-bookings/my-bookings.component';
 import { PostinganComponent } from './pages/postingan/postingan.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 const routes: Routes = [
   { path: '', component: ClientComponent },
   { path: 'postingan', component: PostinganComponent },
   { path: 'dashboard', component: ClientDasbhboardComponent },
   { path: 'bookings', component: MyBookingsComponent },
-  { path: 'ad/:adId', component: AdDetailComponent }
+  { path: 'ad/:adId', component: AdDetailComponent },
+  { path: 'contact', component: ContactComponent }
 
 ];
 

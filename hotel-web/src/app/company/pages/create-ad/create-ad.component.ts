@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreateAdComponent {
   validateForm!: FormGroup;
-
+  isPosting: boolean = false; // Properti untuk menandai apakah sedang dalam proses posting atau tidak
   selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
 
@@ -45,46 +45,47 @@ export class CreateAdComponent {
     }
   }
 
-  // Fungsi untuk menambahkan iklan
+ 
   postAd() {
+    // Cek apakah sedang dalam proses posting atau tidak
+    if (this.isPosting) {
+      return; // Jika sedang dalam proses posting, keluar dari metode
+    }
+
+    // Setel isPosting menjadi true saat tombol posting diklik
+    this.isPosting = true;
+
     if (this.validateForm.valid) {
       const formData: FormData = new FormData();
-
-      // Tambahkan data ke formData
       formData.append('img', this.selectedFile as Blob);
       formData.append('serviceName', this.validateForm.get('serviceName')?.value);
       formData.append('description', this.validateForm.get('description')?.value);
       formData.append('price', this.validateForm.get('price')?.value.toString());
 
-      // Panggil layanan untuk menambahkan iklan
       this.companyService.postAd(formData).subscribe(
         res => {
-          // Format harga
-          const formattedPrice = new Intl.NumberFormat('id-ID', {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0,
-            style: 'currency',
-            currency: 'IDR'
-          }).format(this.validateForm.get('price')?.value);
-
+          // Tangani sukses
+          // Aktifkan kembali tombol posting setelah proses selesai
+          this.isPosting = false;
           // Tampilkan notifikasi sukses
           this.notification.success(
             'SUCCESS',
-            `Tambahkan Data Berhasil. Harga: ${formattedPrice}`,
+            `Tambahkan Data Berhasil.`,
             { nzDuration: 5000 }
           );
           this.router.navigateByUrl('/company/ads');
         },
         error => {
-          // Tangani kesalahan dan tampilkan notifikasi error
+          // Tangani error
+          // Aktifkan kembali tombol posting setelah proses selesai
+          this.isPosting = false;
+          // Tampilkan notifikasi error
           let errorMessage = 'Terjadi kesalahan';
-
           if (error?.error?.message) {
             errorMessage = error.error.message;
           } else if (error?.message) {
             errorMessage = error.message;
           }
-
           this.notification.error(
             'ERROR',
             errorMessage,
@@ -93,7 +94,8 @@ export class CreateAdComponent {
         }
       );
     } else {
-      // Notifikasi error jika form tidak valid
+      // Aktifkan kembali tombol posting saat form tidak valid
+      this.isPosting = false;
       this.notification.error(
         'ERROR',
         'Form tidak valid. Harap periksa input Anda.',
@@ -101,4 +103,5 @@ export class CreateAdComponent {
       );
     }
   }
+
 }

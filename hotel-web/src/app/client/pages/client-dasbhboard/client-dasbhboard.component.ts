@@ -10,5 +10,28 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./client-dasbhboard.component.scss']
 })
 export class ClientDasbhboardComponent  {
- 
+ bookings: any[] = [];
+
+  constructor(
+    private clientService: ClientService,
+    private notification: NzNotificationService
+  ) {}
+
+  ngOnInit(): void {
+    this.getMyBookings();
+  }
+
+  getMyBookings() {
+    this.clientService.getMyBookings().subscribe(
+      (res: any[]) => {
+        this.bookings = res;
+      },
+      (error: any) => {
+        console.error('Error fetching bookings:', error);
+        this.notification.error('Error', 'Failed to fetch bookings. Please try again later.');
+      }
+    );
+  }
 }
+
+

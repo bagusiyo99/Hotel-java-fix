@@ -7,6 +7,7 @@ import { AllAdsComponent } from './pages/all-ads/all-ads.component';
 import { UpdateAdComponent } from './pages/update-ad/update-ad.component';
 import { InvoiceCompanyComponent } from './pages/invoice-company/invoice-company.component';
 import { PesananComponent } from './pages/pesanan/pesanan.component';
+import { ContactsComponent } from './pages/contacts/contacts.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'update/:id', component: UpdateAdComponent },
   { path: 'invoice-company', component: InvoiceCompanyComponent },
   { path: 'boking', component: PesananComponent },
+  { path: 'contacts', component: ContactsComponent },
 
 
 

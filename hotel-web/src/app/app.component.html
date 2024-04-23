@@ -19,7 +19,7 @@
           <a class="nav-link text-white" [routerLink]="['/blog/articles']" routerLinkActive="active">Artikel</a>
         </li>
         <li class="nav-item " routerLinkActive="active">
-          <a class="nav-link text-white" routerLinkActive="active">Kontak</a>
+          <a class="nav-link text-white" [routerLink]="['/company/contacts']" routerLinkActive="active">Kontak</a>
         </li>
       </ul>
       <div class="d-flex">
@@ -49,9 +49,9 @@
         <li class="nav-item " routerLinkActive="active">
           <a class="nav-link text-white" [routerLink]="['/client/bookings']" routerLinkActive="active">Pesanan</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link text-white" [routerLink]="['/client/ads']" routerLinkActive="active">Kategori</a>
-        </li> -->
+        <li class="nav-item">
+          <a class="nav-link text-white" [routerLink]="['/client/contact']" routerLinkActive="active">Kontak</a>
+        </li>
       </ul>
       <div class="d-flex">
         <button class="btn btn-danger" type="button" routerLink="/logout" routerLinkActive="active" (click)="logout()">Logout</button>

@@ -25,6 +25,8 @@ export class ClientService {
     
   }
 
+  
+
    getAllArticles(): Observable<any> {
     return this.http.get(BASIC_URL + `api/client/articles`, {
       headers: this.createAuthorizationHeader()
@@ -72,6 +74,19 @@ export class ClientService {
       headers: this.createAuthorizationHeader()
     })
     
+  }
+
+  
+ 
+    postContact(contactDTO: any): Observable<any> {
+    const userId = UserStorageService.getUserId();
+    return this.http.post(BASIC_URL + `api/contact/contact/${userId}`, contactDTO, {
+      headers: this.createAuthorizationHeader()
+    }).pipe(
+      catchError(error => {
+        return throwError(error);
+      })
+    );
   }
 
      getMyBookings(): Observable<any> {

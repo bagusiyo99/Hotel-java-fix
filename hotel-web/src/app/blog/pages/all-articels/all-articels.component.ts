@@ -34,26 +34,26 @@ export class AllArticelsComponent {
     this.getAllArticlesByUserId();   
   }
 
-  // getAllArticlesByUserId() {
-  //   this.blogService.getAllArticlesByUserId().subscribe(res => {
-  //     this.articles = res;
-  //   });
-  // }
-    getAllArticlesByUserId() {
-        this.blogService.getAllArticlesByUserId()
-            .subscribe(
-                (res) => {
-                    this.articles = res;
-                    this.totalArticles = this.articles.length;
-                    this.totalArticlesPages = Math.ceil(this.totalArticles / this.articlesPerPage);
-                    this.updatePagedArticles();
-                },
-                (error) => {
-                    console.error('Failed to load articles:', error);
-                }
-            );
-    }
 
+getAllArticlesByUserId() {
+  this.blogService.getAllArticlesByUserId()
+    .subscribe(
+      (res) => {
+        // Mengurutkan artikel berdasarkan createdAt secara descending
+        this.articles = res.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        
+        // Mendapatkan jumlah artikel dan halaman
+        this.totalArticles = this.articles.length;
+        this.totalArticlesPages = Math.ceil(this.totalArticles / this.articlesPerPage);
+        
+        // Memperbarui artikel pada halaman pertama
+        this.updatePagedArticles();
+      },
+      (error) => {
+        console.error('Failed to load articles:', error);
+      }
+    );
+}
 
   updateImg(img) {
     return 'data:image/jpeg;base64,' + img;
