@@ -1,3 +1,8 @@
+<div class="approved-total">
+  <p class="total-label">Total Pembayaran Seluruh :</p>
+  <p class="total-amount">{{ formatPrice(getApprovedTotalPayment()) }}</p>
+</div>
+
 <nz-table #basicTable [nzData]="bookedServices" [nzPageSize]="20" nzShowPagination="false" nzBordered="true" nzSize="middle" style="padding: 100px;">
   <thead>
     <tr>

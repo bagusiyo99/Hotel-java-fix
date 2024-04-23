@@ -12,6 +12,9 @@ const BASIC_URL = "http://localhost:8080/";
   providedIn: 'root'
 })
 export class CompanyService {
+  getDataLaporan() {
+    throw new Error('Method not implemented.');
+  }
 
   updateAdById(adId: any, ad: any) {
     throw new Error('Method not implemented.');
