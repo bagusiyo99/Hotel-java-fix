@@ -1,19 +1,21 @@
 <nz-table #basicTable [nzData]="contacts" [nzPageSize]="20" nzShowPagination="false" nzBordered="true" nzSize="middle" style="padding: 100px;">
   <thead>
     <tr>
-      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Nama </th>
-      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Address</th>
-      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Description</th>
-      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Nama Pengguna</th> <!-- Ganti 'Nama Pengguna' sesuai kebutuhan -->
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Nama Pengirim</th> <!-- Ganti 'Nama Pengguna' sesuai kebutuhan -->
+
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Telpon </th>
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Alamat</th>
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Kritik Dan Saran</th>
 
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let contact of contacts">
+      <td style="font-weight: 600; padding: 10px;">{{ contact.companyName }}</td> <!-- Gunakan 'companyName' sesuai dengan nama atribut yang diinginkan -->
+
       <td style="font-weight: 600; padding: 10px;">{{ contact.name }}</td>
       <td style="font-weight: 600; padding: 10px;">{{ contact.description }}</td>
       <td style="font-weight: 600; padding: 10px;">{{ contact.address }}</td>
-      <td style="font-weight: 600; padding: 10px;">{{ contact.companyName }}</td> <!-- Gunakan 'companyName' sesuai dengan nama atribut yang diinginkan -->
 
     </tr>
   </tbody>

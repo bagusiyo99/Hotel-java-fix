@@ -1,12 +1,12 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="searchAdByName()" class="my-4 text-center mb-5">
   <div class="form-group d-inline-flex">
     <input nz-input placeholder="Pencarian" formControlName="service" nzSize="large" class="form-control mr-4" style="width: 70%;" />
-    <button nz-button nzSize="large" nzType="primary" class="btn btn-success ml-5" style="margin-left: 10px;">Search</button>
+    <button nz-button nzSize="large" nzType="primary" class="btn btn-success ml-5" style="margin-left: 10px;">Cari</button>
   </div>
 </form>
 <div class="container mb-4">
   <div class="d-flex justify-content-start">
-    <button class="btn btn-success" [routerLink]="['/company/ad']" routerLinkActive="active">Tambah Produk</button>
+    <button class="btn btn-success" [routerLink]="['/company/tambahProduk']" routerLinkActive="active">Tambah Produk</button>
   </div>
 </div>
 
@@ -18,6 +18,8 @@
           <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;" scope="col">Gambar</th>
           <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;" scope="col">Nama Produk</th>
           <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;" scope="col">Harga</th>
+          <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;" scope="col">Kamar Mandi</th>
+          <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;" scope="col">Kamar Tidur</th>
           <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;" scope="col">Deskripsi</th>
           <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;" scope="col">Aksi</th>
         </tr>
@@ -27,7 +29,10 @@
           <td class="heading" style="font-size: 18px; vertical-align: middle; text-align: center;"><img [src]="updateImg(ad.returnedImg)" alt="Image of {{ ad.serviceName }}" style="height: 200px; width: 200px; border: 1px solid #ddd;"></td>
           <td class="heading" style="font-size: 18px; vertical-align: middle; text-align: center;">{{ ad.serviceName }}</td>
           <td class="heading" style="font-size: 18px; vertical-align: middle; text-align: center;">{{ formatPrice(ad.price) }}</td>
-          <td class="heading" style="font-size: 18px; vertical-align: middle; text-align: center;">{{ ad.description }}</td>
+          <td class="heading" style="font-size: 18px; vertical-align: middle; text-align: center;">{{ ad.bath }}</td>
+          <td class="heading" style="font-size: 18px; vertical-align: middle; text-align: center;">{{ ad.bed }}</td>
+          <td class="heading" style="font-size: 18px; vertical-align: middle; text-align: center;">{{ limitDescription(ad.description, 160) }}</td>
+
           <td class="heading" style="font-size: 18px; vertical-align: middle; text-align: center;">
             <button class="btn btn-success  mr-2" (click)="updateAd(ad.id)">Update</button>
             <br>

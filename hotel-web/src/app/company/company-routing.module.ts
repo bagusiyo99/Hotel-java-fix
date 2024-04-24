@@ -13,8 +13,8 @@ import { ContactsComponent } from './pages/contacts/contacts.component';
 const routes: Routes = [
   { path: '', component: CompanyComponent },
   { path: 'dashboard', component: CompanyDasbhboardComponent },
-  { path: 'ad', component: CreateAdComponent },
-  { path: 'ads', component: AllAdsComponent },
+  { path: 'tambahProduk', component: CreateAdComponent },
+  { path: 'postingan', component: AllAdsComponent },
   { path: 'update/:id', component: UpdateAdComponent },
   { path: 'invoice-company', component: InvoiceCompanyComponent },
   { path: 'boking', component: PesananComponent },

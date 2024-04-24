@@ -2,7 +2,7 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="searchArticleByTitle()" class="my-4 text-center mb-5">
   <div class="form-group d-inline-flex">
     <input nz-input placeholder="Pencarian" formControlName="service" nzSize="large" class="form-control mr-4" style="width: 70%;" />
-    <button nz-button nzSize="large" nzType="primary" class="btn btn-success ml-5" style="margin-left: 10px;">Search</button>
+    <button nz-button nzSize="large" nzType="primary" class="btn btn-success ml-5" style="margin-left: 10px;">Cari</button>
   </div>
 </form>
 <div class="container mb-4">
@@ -11,22 +11,31 @@
   </div>
 </div>
 
+
 <div class="container">
-  <div class="row">
-    <!-- Loop through ads to display each ad in a card -->
-    <div class="col-md-4 mb-4" *ngFor="let article of pagedArticles">
-      <div class="card h-100">
-        <img class="card-img-top" [src]="updateImg(article.returnedImg)" alt="Image of {{ article.title }}" style="height: 300px; width: 100%;">
-        <div class="card-body">
-          <h5 class="card-title">{{ article.title }}</h5>
-          <p class="card-text">Deskripsi: {{ article.description }}</p>
-          <div class="btn-group" role="group">
-            <button class="btn btn-success btn-sm" (click)="updateArticle(article.id)" style="margin-right: 16px;">Update</button>
-            <button class="btn btn-danger btn-sm" (click)="deleteArticle(article.id)">Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="table-responsive">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;" scope="col">Gambar</th>
+          <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;" scope="col">Nama Produk</th>
+          <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;" scope="col">Deskripsi</th>
+          <th class="heading" style="background-color: rgb(25, 135, 84); color: white; font-size: 18px; vertical-align: bottom; text-align: center;" scope="col">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let  article of pagedArticles">
+          <td class="heading" style="font-size: 18px; vertical-align: middle; text-align: center;"><img [src]="updateImg(article.returnedImg)" alt="Image of {{ article.title }}" style="height: 200px; width: 200px; border: 1px solid #ddd;"></td>
+          <td class="heading" style="font-size: 18px; vertical-align: middle; text-align: center;">{{ article.title  }}</td>
+          <td class="heading" style="font-size: 18px; vertical-align: middle; text-align: center;">{{ limitDescription(article.description, 160) }}</td>
+          <td class="heading" style="font-size: 18px; vertical-align: middle; text-align: center;">
+            <button class="btn btn-success  mr-2" (click)="updateArticle(article.id)">Update</button>
+            <br>
+            <button class="btn btn-danger mt-3" (click)="deleteArticle(article.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 

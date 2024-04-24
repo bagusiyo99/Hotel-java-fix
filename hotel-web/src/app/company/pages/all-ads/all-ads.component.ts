@@ -50,9 +50,8 @@ export class AllAdsComponent implements OnInit {
   this.companyService.getAllAdsByUserid().subscribe(
     (res) => {
       // Urutkan postingan berdasarkan tanggal pembuatan secara terbalik
-      this.ads = res.sort((a, b) => {
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-      });
+         // Mengurutkan artikel berdasarkan createdAt secara descending
+        this.ads = res.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
       this.totalAds = this.ads.length;
       this.totalAdsPages = Math.ceil(this.totalAds / this.adsPerPage);
       this.updatePagedAds();
@@ -102,6 +101,8 @@ export class AllAdsComponent implements OnInit {
     }).format(price);
   }
 
+  
+
 searchAdByName() {
     // Ambil nilai dari form control 'service' yang ingin dicari
     const searchTerm = this.validateForm.get('service').value;
@@ -142,6 +143,14 @@ searchAdByName() {
     );
 }
 
+
+limitDescription(description: string, limit: number): string {
+    if (description.length > limit) {
+        return description.substring(0, limit) + '...'; // Menambahkan elipsis untuk menandakan bahwa deskripsi telah dipotong
+    } else {
+        return description;
+    }
+}
 
   goToAdsPage(page: number) {
     this.currentAdsPage = page;

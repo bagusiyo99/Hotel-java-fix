@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'postingan', component: PostinganComponent },
   { path: 'dashboard', component: ClientDasbhboardComponent },
   { path: 'bookings', component: MyBookingsComponent },
-  { path: 'ad/:adId', component: AdDetailComponent },
+  { path: 'pesanan/:adId', component: AdDetailComponent },
   { path: 'contact', component: ContactComponent }
 
 ];

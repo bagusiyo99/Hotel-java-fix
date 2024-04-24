@@ -9,40 +9,47 @@
 <!--  -->
 <div class="container">
   <div class="row">
-    <!-- Loop through ads to display each ad in a card -->
-    <div class="col-md-4 mb-4" *ngFor="let ad of pagedAds">
-      <div class="card h-100">
-        <img class="card-img-top" [src]="updateImg(ad.returnedImg)" alt="Image of {{ ad.serviceName }}" style="height: 300px; width: 100%;">
-        <div class="card-body">
-          <h5 class="card-title">{{ ad.serviceName }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Harga: {{ formatPrice(ad.price) }}</h6>
-          <p class="card-text">Deskripsi: {{ ad.description }}</p>
-          <div class="btn-group" role="group">
+    <div *ngFor="let ad of pagedAds" class="col-lg-4 col-md-6 mb-4 wow fadeInUp" data-wow-delay="0.1s">
+      <div class="room-item shadow rounded overflow-hidden">
+        <div class="position-relative">
+          <img class="img-fluid" [src]="updateImg(ad.returnedImg)" alt="Room Image" style="height: 300px; width: 100%;">
+          <small class="position-absolute start-0 top-100 translate-middle-y bg-success text-white rounded py-1 px-3 ms-4">{{ formatPrice(ad.price) }}</small>
+        </div>
+        <div class="p-4 mt-2">
+          <div class="d-flex justify-content-between mb-3">
+            <h5 class="mb-0">{{ ad.serviceName }}</h5>
+
+          </div>
+          <div class="d-flex mb-3">
+            <small class="border-end me-3 pe-3 "><i class="fa fa-bed text-success me-2"></i>{{ ad.bed }} Bed</small>
+            <small class="border-end me-3 pe-3"><i class="fa fa-bath text-success me-2"></i>{{ ad.bath }} Bath</small>
+            <small><i class="fa fa-wifi text-success me-2"></i>Wifi</small>
+          </div>
+          <p class="text-body mb-3">{{ limitDescription(ad.description, 80) }}</p>
+          <div class="d-flex justify-content-between">
             <!-- <a nz-button nzSize="small" nz-button nzType="primary" routerLink="/client/ad/{{ ad.id }}" class="btn btn-primary">View</a> -->
-            <button class="btn btn-success btn-sm" routerLink="/client/ad/{{ ad.id }}" style="margin-right: 16px;">Detail</button>
-            <button class="btn btn-warning btn-sm" routerLink="/client/ad/{{ ad.id }}" style="margin-right: 16px;">Pesan Sekarang</button>
-
-
+            <button class="btn btn-success btn-sm" routerLink="/client/pesanan/{{ ad.id }}" style="margin-right: 16px;">Detail</button>
+            <button class="btn btn-warning btn-sm text-white" routerLink="/client/pesanan/{{ ad.id }}" style="margin-right: 16px;">Pesan Sekarang</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<nav aria-label="Room pagination" class="mt-3 mb-5">
-  <ul class="pagination justify-content-center">
-    <li class="page-item" *ngIf="currentAdsPage > 1">
-      <button class="page-link" (click)="goToAdsPage(currentAdsPage - 1)">Previous</button>
-    </li>
-    <li class="page-item" *ngFor="let page of [].constructor(totalAdsPages); let i = index">
-      <button class="page-link" [ngClass]="{'active bg-success': currentAdsPage === i + 1}" (click)="goToAdsPage(i + 1)">
 
-        {{ i + 1 }}
-      </button>
-    </li>
-    <li class="page-item" *ngIf="currentAdsPage < totalAdsPages">
-      <button class="page-link" (click)="goToAdsPage(currentAdsPage + 1)">Next</button>
-    </li>
-  </ul>
-</nav>
+  <nav aria-label="Room pagination" class="mt-3 mb-5">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" *ngIf="currentAdsPage > 1">
+        <button class="page-link" (click)="goToAdsPage(currentAdsPage - 1)">Previous</button>
+      </li>
+      <li class="page-item" *ngFor="let page of [].constructor(totalAdsPages); let i = index">
+        <button class="page-link" [ngClass]="{'active bg-success': currentAdsPage === i + 1}" (click)="goToAdsPage(i + 1)">
+
+          {{ i + 1 }}
+        </button>
+      </li>
+      <li class="page-item" *ngIf="currentAdsPage < totalAdsPages">
+        <button class="page-link" (click)="goToAdsPage(currentAdsPage + 1)">Next</button>
+      </li>
+    </ul>
+  </nav>

@@ -141,6 +141,13 @@ searchArticleByTitle() {
     }
 
 
+limitDescription(description: string, limit: number): string {
+    if (description.length > limit) {
+        return description.substring(0, limit) + '...'; // Menambahkan elipsis untuk menandakan bahwa deskripsi telah dipotong
+    } else {
+        return description;
+    }
+}
 
 
 

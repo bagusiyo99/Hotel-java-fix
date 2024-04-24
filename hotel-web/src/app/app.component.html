@@ -13,7 +13,7 @@
           <a class="nav-link text-white" [routerLink]="['/company/boking']">Boking</a>
         </li>
         <li class="nav-item " routerLinkActive="active">
-          <a class="nav-link text-white" [routerLink]="['/company/ads']">Postingan</a>
+          <a class="nav-link text-white" [routerLink]="['/company/postingan']">Postingan</a>
         </li>
         <li class="nav-item " routerLinkActive="active">
           <a class="nav-link text-white" [routerLink]="['/blog/articles']" routerLinkActive="active">Artikel</a>
@@ -32,6 +32,9 @@
 
 
 <nav class="navbar navbar-expand-lg bg-success text-white" *ngIf="isClientLoggedIn">
+  <link href="/assets/landing/img/favicon.ico" rel="icon">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <div class="container-fluid">
     <a class="navbar-brand text-white" href="#">User</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +52,7 @@
         <li class="nav-item " routerLinkActive="active">
           <a class="nav-link text-white" [routerLink]="['/client/bookings']" routerLinkActive="active">Pesanan</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" routerLinkActive="active">
           <a class="nav-link text-white" [routerLink]="['/client/contact']" routerLinkActive="active">Kontak</a>
         </li>
       </ul>

@@ -1,28 +1,30 @@
 <div class="container mt-4" *ngIf="ad">
-  <div class="row ">
+  <button nz-button nzType="default" routerLink="/client/postingan" class="btn btn-green mt-3">Kembali</button>
 
-    <!-- Detail Konten -->
+  <div class="row mt-5">
+
     <div class="col-lg-9">
-      <div class="card ">
+      <div class="card">
         <div class="card-body">
-          <!-- Gambar Profil -->
-          <div class="d-flex align-items-center mb-3">
-            <img class="profile img-thumbnail rounded-circle me-3" [src]="avatarUrl" alt="Ad Image" style="width: 400px; height: 400px;">
-
-            <!-- Detail Konten -->
-            <div>
+          <!-- Detail Konten -->
+          <div class="row align-items-center mb-3">
+            <!-- Gambar Profil -->
+            <img class="profile" [src]="avatarUrl" alt="Ad Image" style="width: 100%;" />
+            <div class="text-container">
               <h3 class="fw-bold text-dark mb-2">{{ ad.serviceName }}</h3>
-              <p class="text-muted mb-1">Harga: <span class="text-success">{{ formatPrice(ad.price) }}</span></p>
+              <p class="text-muted mb-1"><strong><span class="text-success">{{ formatPrice(ad.price) }}</span>
+                </strong> </p>
+              <p class="text-muted mb-1"><strong><i class="fa fa-bath text-success me-2"></i>:</strong> {{ ad.bath }} Kamar Mandi</p>
+              <p class="text-muted mb-1"><strong><i class="fa fa-bed text-success me-2"></i>:</strong> {{ ad.bed }} Kamar Tidur</p>
               <p class="text-muted mb-1"><strong>Deskripsi:</strong> {{ ad.description }}</p>
-              <!-- <p class="text-muted mb-0"><strong>Nama Perusahaan:</strong> {{ ad.companyName }}</p> -->
             </div>
           </div>
-
-          <!-- Tombol Kembali -->
-          <button nz-button nzType="default" routerLink="/client/dashboard" class="btn-green mt-3">Kembali</button>
         </div>
       </div>
     </div>
+
+
+
 
     <!-- Formulir Pemesanan -->
     <div class="col-lg-3">

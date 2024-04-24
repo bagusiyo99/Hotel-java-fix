@@ -36,9 +36,25 @@
               </nz-form-item>
             </div>
 
+            <div nz-col nzSpan="24" style="margin-top: 20px">
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="wajib angka!">
+                  <input nz-input placeholder="Tempat Tidur" formControlName="bed" type="number" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div nz-col nzSpan="24" style="margin-top: 20px">
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="wajib angka!">
+                  <input nz-input placeholder="Kamar Mandi" formControlName="bath" type="number" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
             <div nz-col nzSpan="24" class="input">
               <nz-form-item>
-                <nz-form-control nzHasFeedback nzErrorTip="The input is not valid !">
+                <nz-form-control nzHasFeedback nzErrorTip="wajib angka!">
                   <input nz-input placeholder="Harga" formControlName="price" type="number" />
                 </nz-form-control>
               </nz-form-item>

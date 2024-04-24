@@ -119,6 +119,16 @@ export class LandingPageComponent implements OnInit {
         }).format(price);
     }
 
+
+
+limitDescription(description: string, limit: number): string {
+    if (description.length > limit) {
+        return description.substring(0, limit) + '...'; // Menambahkan elipsis untuk menandakan bahwa deskripsi telah dipotong
+    } else {
+        return description;
+    }
+}
+
   // Fungsi untuk navigasi ke halaman login
   goToLogin() {
     this.router.navigate(['/login']);

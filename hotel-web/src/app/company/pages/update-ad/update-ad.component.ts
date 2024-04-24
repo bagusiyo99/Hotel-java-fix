@@ -37,6 +37,8 @@ export class UpdateAdComponent {
   ngOnInit() {
     this.validateForm = this.fb.group({
       serviceName: [null, [Validators.required]],
+        bed: [null, [Validators.required]],
+      bath: [null, [Validators.required]],
       description: [null, [Validators.required]],
       price: [null, [Validators.required]],
     });
@@ -68,6 +70,8 @@ updateAd() {
 
   // Tambahkan data lain ke formData
   formData.append('serviceName', this.validateForm.get('serviceName').value);
+  formData.append('bed', this.validateForm.get('bed')?.value);
+  formData.append('bath', this.validateForm.get('bath')?.value);
   formData.append('description', this.validateForm.get('description').value);
   formData.append('price', this.validateForm.get('price').value);
 
@@ -78,7 +82,7 @@ updateAd() {
         'Data berhasil diperbarui',
         { nzDuration: 5000 }
       );
-      this.router.navigateByUrl('/company/ads');
+      this.router.navigateByUrl('/company/postingan');
     },
     error => {
       this.notification.error(
