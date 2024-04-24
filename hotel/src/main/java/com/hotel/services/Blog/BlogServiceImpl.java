@@ -69,6 +69,7 @@ public class BlogServiceImpl implements BlogService {
             Article article = optionalArticle.get();
             article.setTitle(articleDTO.getTitle());
             article.setDescription(articleDTO.getDescription());
+            article.setCreatedAt(new Date());
 
             if (articleDTO.getImg() != null) {
                 article.setImg(articleDTO.getImg().getBytes());

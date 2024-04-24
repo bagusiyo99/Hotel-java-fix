@@ -19,6 +19,9 @@ public class Article {
     private Long id;
 
     private String title;
+
+    @Lob
+    @Column(length = 1000) // Mengatur panjang maksimum kolom menjadi 1000 karakter
     private String description;
 
     // Gambar iklan sebagai array byte (LOB - Large Object)

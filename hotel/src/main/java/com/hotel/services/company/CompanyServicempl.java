@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -44,10 +45,12 @@ public class CompanyServicempl implements CompanyService {
             Ad ad = new Ad();
             ad.setServiceName(adDTO.getServiceName());
             ad.setDescription(adDTO.getDescription());
+            ad.setBed(adDTO.getBed());
+            ad.setBath(adDTO.getBath());
+            ad.setCreatedAt(new Date());
             ad.setImg(adDTO.getImg().getBytes());
             ad.setPrice(adDTO.getPrice());
             ad.setUser(optionalUser.get());
-
             adRepository.save(ad);
             return true;
         }
@@ -85,8 +88,10 @@ public class CompanyServicempl implements CompanyService {
 
             ad.setServiceName(adDTO.getServiceName());
             ad.setDescription(adDTO.getDescription());
+            ad.setBath(adDTO.getBath());
+            ad.setBed(adDTO.getBed());
             ad.setPrice(adDTO.getPrice());
-
+            ad.setCreatedAt(new Date());
             // Mengatur gambar jika ada
             if (adDTO.getImg() != null) {
                 ad.setImg(adDTO.getImg().getBytes());

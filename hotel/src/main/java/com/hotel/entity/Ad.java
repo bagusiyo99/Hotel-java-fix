@@ -7,6 +7,8 @@ import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "ads")
 @Data
@@ -20,11 +22,23 @@ public class Ad {
     // Nama layanan atau produk yang diiklankan
     private String serviceName;
 
+    // Nama layanan atau produk yang diiklankan
+    private String bed;
+
+    // Nama layanan atau produk yang diiklankan
+    private String bath;
+
+
     // Deskripsi detail iklan
+
+    @Lob
+    @Column(length = 1000) // Mengatur panjang maksimum kolom menjadi 1000 karakter
     private String description;
 
     // Harga layanan atau produk yang diiklankan
     private Double price;
+
+    private Date createdAt;
 
     // Gambar iklan sebagai array byte (LOB - Large Object)
     @Lob
@@ -46,6 +60,9 @@ public class Ad {
         adDTO.setServiceName(serviceName);
         adDTO.setDescription(description);
         adDTO.setPrice(price);
+        adDTO.setBed(bed);
+        adDTO.setBath(bath);
+        adDTO.setCreatedAt(createdAt);
         // Mengambil nama pengguna dari entitas User yang terkait
         adDTO.setCompanyName(user.getName());
         // Mengambil gambar iklan
