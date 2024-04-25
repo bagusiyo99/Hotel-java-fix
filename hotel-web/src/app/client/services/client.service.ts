@@ -80,7 +80,7 @@ export class ClientService {
  
     postContact(contactDTO: any): Observable<any> {
     const userId = UserStorageService.getUserId();
-    return this.http.post(BASIC_URL + `api/contact/contact/${userId}`, contactDTO, {
+    return this.http.post(BASIC_URL + `api/client/contact/${userId}`, contactDTO, {
       headers: this.createAuthorizationHeader()
     }).pipe(
       catchError(error => {

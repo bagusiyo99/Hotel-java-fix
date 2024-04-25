@@ -25,7 +25,10 @@ contacts: any[] = []; // Assuming contacts will be stored in an array
 
   getAllContact(): void {
     this.companyService.getAllContact().subscribe(
+      
       (res) => {
+      this.contacts = res.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
         // Assign the fetched contacts to the 'contacts' property
         this.contacts = res;
       },

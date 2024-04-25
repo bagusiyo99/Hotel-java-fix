@@ -11,7 +11,7 @@ const BASIC_URL = "http://localhost:8080/";
 })
 export class BlogService {
   getAllArticles(): Observable<any> {
-    return this.http.get(BASIC_URL + 'api/blog/articles', {
+    return this.http.get(BASIC_URL + 'api/company/articles', {
       headers: this.createAuthorizationHeader()
     }).pipe(
       catchError(error => {
@@ -24,7 +24,7 @@ export class BlogService {
 
   postArticle(articleDto: any): Observable<any> {
     const userId = UserStorageService.getUserId();
-    return this.http.post(BASIC_URL + `api/blog/article/${userId}`, articleDto, {
+    return this.http.post(BASIC_URL + `api/company/article/${userId}`, articleDto, {
       headers: this.createAuthorizationHeader()
     }).pipe(
       catchError(error => {
@@ -33,10 +33,13 @@ export class BlogService {
     );
   }
 
+  
+
+
 
   getAllArticlesByUserId(): Observable<any> {
     const userId = UserStorageService.getUserId();
-    return this.http.get(BASIC_URL + `api/blog/articles/${userId}`, {
+    return this.http.get(BASIC_URL + `api/company/articles/${userId}`, {
       headers: this.createAuthorizationHeader()
     }).pipe(
       catchError(error => {
@@ -48,19 +51,19 @@ export class BlogService {
 
 
   getArticleById(articleId: any): Observable<any> {
-    return this.http.get(BASIC_URL + `api/blog/article/${articleId}`, {
+    return this.http.get(BASIC_URL + `api/company/article/${articleId}`, {
       headers: this.createAuthorizationHeader()
     })
   }
 
     updateArticle(articleId: any, articleDto:any): Observable<any> {
-    return this.http.put(BASIC_URL + `api/blog/article/${articleId}`,articleDto, {
+    return this.http.put(BASIC_URL + `api/company/article/${articleId}`,articleDto, {
       headers: this.createAuthorizationHeader()
     })
   }
 
     deleteArticle(articleId: any): Observable<any> {
-    return this.http.delete(BASIC_URL + `api/blog/article/${articleId}`, {
+    return this.http.delete(BASIC_URL + `api/company/article/${articleId}`, {
       headers: this.createAuthorizationHeader()
     })
   }
@@ -72,7 +75,7 @@ export class BlogService {
 
 
  searchArticleByTitle(title:any): Observable<any> {
-    return this.http.get(BASIC_URL + `api/blog/search/${title}`, {
+    return this.http.get(BASIC_URL + `api/company/search/${title}`, {
       headers: this.createAuthorizationHeader()
     }).pipe(
       catchError(error => {

@@ -44,6 +44,7 @@ export class PostinganComponent implements OnInit {
     getAllAds() {
     this.clientService.getAllAds().subscribe(
       (res) => {
+        this.ads = res.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
         this.ads = res;
         this.totalAds = this.ads.length;
         this.totalAdsPages = Math.ceil(this.totalAds / this.adsPerPage);

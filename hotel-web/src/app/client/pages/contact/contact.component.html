@@ -10,14 +10,14 @@
         <div class="card-body form-container">
           <div class="row">
             <div class="col-md-4 d-flex align-items-center">
-              <img src="/assets/s.png" class="img-fluid" alt="Gambar Kontak">
+              <img src="/assets/sms.png" class="img-fluid" alt="Gambar Kontak">
             </div>
             <div class="col-md-8">
               <form nz-form [formGroup]="validateForm" (ngSubmit)="postContact()">
 
                 <div class="form-group mb-3">
-                  <label for="name">Nama</label>
-                  <input type="text" class="form-control" id="name" placeholder="Masukkan Nama" formControlName="name">
+                  <label for="phone">Whatsapp</label>
+                  <input type="text" class="form-control" id="phone" placeholder="Masukkan Whatsapp" formControlName="phone" type="number" minlength="12" maxlength="13">
                 </div>
 
                 <div class="form-group mb-3">

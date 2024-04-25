@@ -45,17 +45,7 @@ export class CompanyService {
     
   }
 
-  
-  getAllContact(): Observable<any> {
-    return this.http.get(BASIC_URL + `api/company/contacts`, {
-      headers: this.createAuthorizationHeader()
-    }).pipe(
-      catchError(error => {
-        return throwError(error);
-      })
-    );
-    
-  }
+
 
   //02.07
 
@@ -113,22 +103,17 @@ export class CompanyService {
 
 
 
-  
-  postBlog(articleDto: any): Observable<any> {
-    const userId = UserStorageService.getUserId();
-    return this.http.post(BASIC_URL + `api/blog/article/${userId}`, articleDto, {
-      headers: this.createAuthorizationHeader()
-    }).pipe(
-      catchError(error => {
-        return throwError(error);
-      })
-    );
+
+
+    updateBlogById(articleId: any, article: any) {
+    throw new Error('Method not implemented.');
   }
 
 
-  getAllBLogsByUserId(): Observable<any> {
-    const userId = UserStorageService.getUserId();
-    return this.http.get(BASIC_URL + `api/blog/articles/${userId}`, {
+
+    ///contact
+  getAllContact(): Observable<any> {
+    return this.http.get(BASIC_URL + `api/company/contacts`, {
       headers: this.createAuthorizationHeader()
     }).pipe(
       catchError(error => {
@@ -137,32 +122,6 @@ export class CompanyService {
     );
     
   }
-
-
-  getBlogById(articleId: any): Observable<any> {
-    return this.http.get(BASIC_URL + `api/blog/article/${articleId}`, {
-      headers: this.createAuthorizationHeader()
-    })
-  }
-
-    updateBlog(articleId: any, articleDto:any): Observable<any> {
-    return this.http.put(BASIC_URL + `api/blog/article/${articleId}`,articleDto, {
-      headers: this.createAuthorizationHeader()
-    })
-  }
-
-    deleteBlog(articleId: any): Observable<any> {
-    return this.http.delete(BASIC_URL + `api/blog/article/${articleId}`, {
-      headers: this.createAuthorizationHeader()
-    })
-  }
-
-
-    updateBlogById(articleId: any, article: any) {
-    throw new Error('Method not implemented.');
-  }
-
-
 
   
    createAuthorizationHeader(): HttpHeaders {

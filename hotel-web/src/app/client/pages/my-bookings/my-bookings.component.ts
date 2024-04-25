@@ -13,6 +13,7 @@ import { CompanyService } from 'src/app/company/services/company.service';
 export class MyBookingsComponent {
 
   bookedServices: any[] = [];
+booking: any;
 
   constructor(
 
@@ -360,6 +361,358 @@ downloadInvoice(booking: any): void {
   const newWindow = window.open('', '_blank');
   newWindow.document.write(invoiceContent);
 }
+
+
+downloadAllInvoices(): void {
+  // Filter hanya transaksi yang sudah disetujui
+  const approvedBookings = this.bookedServices.filter(booking => booking.reservationStatus === 'APPROVED');
+let totalPayment = 0;
+  approvedBookings.forEach(booking => {
+    totalPayment += booking.totalPayment;
+  });
+
+    const formattedTotalPayment = this.formatPrice(totalPayment);
+
+     // Ambil nama pelanggan dan ID transaksi dari transaksi pertama yang disetujui
+  const firstBooking = approvedBookings[0];
+  const customerName = firstBooking.userName.toUpperCase(); // Konversi nama pelanggan menjadi huruf besar
+  const bookingId = firstBooking.id;
+
+  // Mulai template HTML
+  let allInvoicesContent = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Bukti Boking</title>
+       <style>
+        body {
+            margin: 60px 160px;
+            background-color: #f7f7ff;
+        }
+
+        #invoice {
+            padding: 0px;
+        }
+
+        table, th, td {
+    text-align: center;
+  }
+
+        .invoice {
+            position: relative;
+            background-color: #FFF;
+            min-height: 680px;
+            padding: 15px
+        }
+
+        .invoice header {
+            padding: 10px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #0d6efd
+        }
+
+        .invoice .company-details {
+            text-align: right
+        }
+
+        .invoice .company-details .name {
+            margin-top: 0;
+            margin-bottom: 0
+        }
+
+        .invoice .contacts {
+            margin-bottom: 20px
+        }
+
+        .invoice .invoice-to {
+            text-align: left
+        }
+
+        .invoice .invoice-to .to {
+            margin-top: 0;
+            margin-bottom: 0
+        }
+        
+        .table td {
+    text-align: center;
+  }
+
+        .invoice .invoice-details {
+            text-align: right
+        }
+
+        .invoice .invoice-details .invoice-id {
+            margin-top: 0;
+            color: #0d6efd
+        }
+
+        .invoice main {
+            padding-bottom: 50px
+        }
+
+        .invoice main .thanks {
+            margin-top: -100px;
+            font-size: 2em;
+            margin-bottom: 50px
+        }
+
+        .invoice main .notices {
+            padding-left: 6px;
+            border-left: 6px solid #0d6efd;
+            background: #e7f2ff;
+            padding: 10px;
+        }
+
+        .invoice main .notices .notice {
+            font-size: 1.2em
+        }
+
+        .invoice table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin-bottom: 20px
+        }
+
+        .invoice table td,
+        .invoice table th {
+            padding: 15px;
+            background: #eee;
+            border-bottom: 1px solid #fff
+                text-align: center;
+
+        }
+
+        .invoice table th {
+            white-space: nowrap;
+            font-weight: 400;
+            font-size: 16px
+        }
+
+        .invoice table td h3 {
+            margin: 0;
+            font-weight: 400;
+            color: #0d6efd;
+            font-size: 1.2em
+        }
+
+                .invoice table .total{
+                    text-align: right;
+            font-size: 1.2em
+                }
+
+        .invoice table .qty,
+        .invoice table .unit {
+            text-align: center;
+            font-size: 1.2em
+        }
+
+        .invoice table .no {
+            color: #fff;
+            font-size: 1.6em;
+            background: #0d6efd
+        }
+
+        .invoice table .unit {
+            background: #ddd
+        }
+
+        .invoice table .total {
+            background: #0d6efd;
+            color: #fff
+        }
+
+        .invoice table tbody tr:last-child td {
+            border: none
+        }
+
+        .invoice table tfoot td {
+            background: 0 0;
+            border-bottom: none;
+            white-space: nowrap;
+            text-align: right;
+            padding: 10px 10px;
+            font-size: 1.2em;
+            border-top: 1px solid #aaa
+        }
+
+        .invoice table tfoot tr:first-child td {
+            border-top: none
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 0px solid rgba(0, 0, 0, 0);
+            border-radius: .25rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+        }
+
+        .invoice table tfoot tr:last-child td {
+            color: #0d6efd;
+            font-size: 1.4em;
+            border-top: 1px solid #0d6efd
+        }
+
+        .invoice table tfoot tr td:first-child {
+            border: none
+        }
+
+        .invoice footer {
+            width: 100%;
+            text-align: center;
+            color: #777;
+            border-top: 1px solid #aaa;
+            padding: 8px 0
+        }
+
+        @media print {
+            .invoice {
+                font-size: 11px !important;
+                overflow: hidden !important
+            }
+
+            .invoice footer {
+                position: absolute;
+                bottom: 10px;
+                page-break-after: always
+            }
+
+            .invoice>div:last-child {
+                page-break-before: always
+            }
+        }
+
+        .invoice main .notices {
+            padding-left: 6px;
+            border-left: 6px solid #0d6efd;
+            background: #e7f2ff;
+            padding: 10px;
+        }
+    </style>
+    </head>
+    <body>
+      <!-- Mulai template invoice -->
+      <div class="invoice">
+        <header>
+          <div class="row">
+            <div class="col">
+              <a href="javascript:;">
+                <img src="assets/images/logo-icon.png" width="80" alt="">
+              </a>
+            </div>
+            <div class="col company-details">
+              <h2 class="name">
+                <a target="_blank" href="javascript:;">
+                  Bagus
+                </a>
+              </h2>
+              <div>Jl. jalan apa aja</div>
+              <div>(123) 011-000</div>
+              <div>bagus@example.com</div>
+            </div>
+          </div>
+        </header>
+        <main>
+          <!-- Informasi transaksi dan pelanggan -->
+          <div class="row contacts">
+            <div class="col invoice-to">
+              <div class="text-gray-light">Kwitansi Untuk:</div>
+              <h3 class="to text-uppercase">${customerName}</h3>
+
+            </div>
+            <div class="col invoice-details">
+              <h1 class="invoice-id">ID-${bookingId}</h1>
+            </div>
+          </div>
+          <!-- Tabel detail transaksi -->
+          <table>
+            <thead>
+              <tr>
+                <th class="text-center">No</th>
+                <th class="text-center">Nama Ruangan</th>
+                <th class="text-center">Jumlah Hari</th>
+                <th class="text-center">Harga Harian</th>
+                <th class="text-center">Total Harga</th>
+                <th class="text-center">Pajak 11%</th>
+                <th class="text-center">Total Pembayaran</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Loop melalui transaksi yang disetujui dan tambahkan detail invoice -->
+              ${this.generateInvoiceRows(approvedBookings)}
+            </tbody>
+              <tfoot>
+              <!-- ... Bagian lain dari kode HTML ... -->
+
+                
+                  <td colspan="5"></td>
+                  <td>Total Pembayaran Keseluruhan + Pajak 11%</td>
+                  <td> ${formattedTotalPayment}</td>
+                 </tr>
+
+            </tfoot>
+           
+          </table>
+          <!-- Pesan terima kasih dan pemberitahuan -->
+          <div class="notices">
+            <div>Pemberitahuan:</div>
+            <div class="notice"> Silahkan Menunjukan ini ke kasir untuk melanjutkan pembayaran </div>
+          </div>
+        </main>
+        <footer>Desain by Bootdey.com
+</footer>
+      </div>
+    </body>
+    </html>
+  `;
+
+  // Buka jendela baru untuk menampilkan faktur keseluruhan
+  const newWindow = window.open('', '_blank');
+  newWindow.document.write(allInvoicesContent);
+}
+
+// Fungsi untuk menghasilkan baris-baris detail invoice
+generateInvoiceRows(bookings): string {
+  let rows = '';
+  bookings.forEach((booking, index) => {
+    const checkInDate = new Date(booking.checkInDate);
+    const checkOutDate = new Date(booking.checkOutDate);
+    const oneDayInMillis = 1000 * 60 * 60 * 24;
+    const durationInMillis = checkOutDate.getTime() - checkInDate.getTime();
+    let durationInDays = Math.ceil(durationInMillis / oneDayInMillis);
+    if (durationInDays === 0) {
+      durationInDays = 1;
+    }
+
+    
+    rows += `
+      <tr>
+        <td class="no text-center">${index + 1}</td>
+        <td class="unit text-center">${booking.serviceName}</td>
+        <td class="text-center text-uppercase">${durationInDays} hari</td>
+        <td class="unit text-center">${this.formatPrice(booking.price)}</td>
+        <td class="text-center text-uppercase">${this.formatPrice(booking.totalPrice)}</td>
+        <td class="unit text-center">${this.formatPrice(booking.tax)}</td>
+
+        <td class="total text-center">${this.formatPrice(booking.totalPayment)}</td>
+      </tr>
+    `;
+  });
+
+  return rows;
+}
+
+
+
 
 
 

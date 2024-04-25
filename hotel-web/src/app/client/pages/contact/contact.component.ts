@@ -25,19 +25,33 @@ export class ContactComponent {
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-      name: [null, [Validators.required]],
+      phone: [null, [Validators.required, Validators.min(12)]],
       address: [null, [Validators.required]],
       description: [null, [Validators.required]],
     });
   }
 
 
-  postContact(){
+postContact() {
+  // Mengatur status posting menjadi true
   if (!this.isPosting) {
-    this.isPosting = true; // Mengatur status posting menjadi true
+    this.isPosting = true;
 
+    const phoneValue = this.validateForm.get('phone').value;
+    // Validasi panjang nomor WhatsApp
+    if (phoneValue.length < 12 || phoneValue.length > 13) {
+      this.notification.error(
+        'ERROR',
+        'Nomor Whatsapp harus terdiri dari 12 hingga 13 digit',
+        { nzDuration: 5000 }
+      );
+      this.isPosting = false; // Mengembalikan status posting ke false
+      return; // Menghentikan eksekusi jika validasi gagal
+    }
+
+    // Jika validasi berhasil, lanjutkan dengan pengiriman data ke server
     const formData: FormData = new FormData();
-    formData.append('name', this.validateForm.get('name').value);
+    formData.append('phone', phoneValue);
     formData.append('address', this.validateForm.get('address').value);
     formData.append('description', this.validateForm.get('description').value);
 
@@ -48,7 +62,8 @@ export class ContactComponent {
           'Tambahkan Data Berhasil',
           { nzDuration: 5000 }
         );
-        this.router.navigateByUrl('/client/contact');
+        this.validateForm.reset(); // Mengosongkan formulir setelah pengiriman data berhasil
+        this.isPosting = false; // Setelah selesai, kembalikan status posting ke false
       },
       error => {
         this.notification.error(
@@ -56,10 +71,9 @@ export class ContactComponent {
           error?.error?.message || 'Terjadi kesalahan',
           { nzDuration: 5000 }
         );
+        this.isPosting = false; // Setelah selesai, kembalikan status posting ke false
       }
-    ).add(() => {
-      this.isPosting = false; // Setelah selesai, kembalikan status posting ke false
-    });
+    );
   }
 }
 
