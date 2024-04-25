@@ -40,6 +40,8 @@ public class WebSecurityConfig {
                 // Mengizinkan akses ke semua endpoint di bawah /api tanpa otentikasi
                 .requestMatchers("/api/**").permitAll()
 
+
+                //AD role company
                 // Mengizinkan akses POST ke endpoint tertentu tanpa otentikasi
                 .requestMatchers(HttpMethod.POST, "/api/company/ad/**").permitAll()
                 // Mengizinkan akses GET ke endpoint tertentu tanpa otentikasi
@@ -55,6 +57,8 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/company/contacts/**").permitAll()
 
 
+
+                //AD role client
                 // Mengizinkan akses GET ke endpoint /api/client/ads/** tanpa otentikasi
                 .requestMatchers(HttpMethod.GET, "/api/client/ads/**").permitAll()
                 // Mengizinkan akses PUT ke endpoint /api/client/ad/** tanpa otentikasi
@@ -72,31 +76,32 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/company/booking/{companyId}").permitAll()
 
 
+                // artikel role company
                 // Mengizinkan akses POST ke endpoint tertentu tanpa otentikasi
-                .requestMatchers(HttpMethod.POST, "/api/blog/article/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/company/article/**").permitAll()
                 // Mengizinkan akses GET ke endpoint tertentu tanpa otentikasi
-                .requestMatchers(HttpMethod.GET, "/api/blog/articles/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/company/articles/**").permitAll()
                 // Mengizinkan akses PUT ke endpoint tertentu tanpa otentikasi
-                .requestMatchers(HttpMethod.PUT, "/api/blog/article/**").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/api/company/article/**").permitAll()
                 // Mengizinkan akses GET ke endpoint tertentu tanpa otentikasi
-                .requestMatchers(HttpMethod.GET, "/api/blog/article/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/company/article/**").permitAll()
                 // Mengizinkan akses DELETE ke endpoint tertentu tanpa otentikasi
-                .requestMatchers(HttpMethod.DELETE, "/api/blog/article/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/blog/search/{title}").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/api/company/article/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/company/search/{title}").permitAll()
 
                 .requestMatchers(HttpMethod.GET, "/api/client/articles/**").permitAll()
 
                 // Mengizinkan akses POST ke endpoint tertentu tanpa otentikasi
-                .requestMatchers(HttpMethod.POST, "/api/contact/contact/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/client/contact/**").permitAll()
                 // Mengizinkan akses GET ke endpoint tertentu tanpa otentikasi
-                .requestMatchers(HttpMethod.GET, "/api/contact/contacts/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/client/contacts/**").permitAll()
                 // Mengizinkan akses PUT ke endpoint tertentu tanpa otentikasi
                 // Mengizinkan akses GET ke endpoint tertentu tanpa otentikasi
-                .requestMatchers(HttpMethod.GET, "/api/contact/contact/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/client/contact/**").permitAll()
                 // Mengizinkan akses DELETE ke endpoint tertentu tanpa otentikasi
 
 
-                .requestMatchers(HttpMethod.GET, "/api/contact/search/{name}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/client/searchC/{address}").permitAll()
 
 
 

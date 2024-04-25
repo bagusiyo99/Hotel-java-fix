@@ -1,9 +1,11 @@
 package com.hotel.controller;
 
+import com.hotel.dto.ContactDTO;
 import com.hotel.dto.ReservationDTO;
 import com.hotel.services.Blog.BlogService;
 import com.hotel.services.client.ClientService;
 import com.hotel.dto.AdDTO;
+import com.hotel.services.contact.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,9 @@ public class ClientController {
 
     @Autowired
     private BlogService blogService;
+
+    @Autowired
+    private ContactService contactService;
 
 
     // Mendapatkan semua iklan yang tersedia
@@ -69,5 +74,36 @@ public class ClientController {
     public ResponseEntity<?> getAllBookingsByUserId(@PathVariable Long userId) {
         // Mengambil semua reservasi pengguna melalui ClientService
         return ResponseEntity.ok(clientService.getAllBookingsByUserId(userId));
+
+    }
+
+    ///// awalan client
+
+    @PostMapping("/contact/{userId}")
+    public ResponseEntity<?> postContact(@PathVariable Long userId, @ModelAttribute ContactDTO contactDTO) throws IOException {
+        boolean success = contactService.postContact(userId, contactDTO);
+        if (success) {
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User does not have the required Company role.");
+        }
+    }
+
+
+
+    @GetMapping("/contact/{contactId}")
+    public ResponseEntity<?> getContactById(@PathVariable Long contactId) {
+        ContactDTO contactDTO = contactService.getContactById(contactId);
+        if (contactDTO != null) {
+            return ResponseEntity.ok(contactDTO);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @GetMapping("/searchC/{address}")
+    public ResponseEntity<?> searchContactByService(@PathVariable String name) {
+        // Mencari iklan menggunakan ClientService dan mengembalikan hasil pencarian
+        return ResponseEntity.ok(contactService.searchContactByName(name));
     }
 }

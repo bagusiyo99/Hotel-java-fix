@@ -1,8 +1,10 @@
 package com.hotel.controller;
 
 import com.hotel.dto.AdDTO;
+import com.hotel.dto.ArticleDTO;
 import com.hotel.dto.ReservationDTO;
 import com.hotel.entity.Reservation;
+import com.hotel.services.Blog.BlogService;
 import com.hotel.services.company.CompanyService;
 import com.hotel.services.contact.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class CompanyController {
     @Autowired
     private ContactService contactService;
 
+    @Autowired
+    private BlogService blogService;
+
     // Metode untuk memposting iklan
     @PostMapping("/ad/{userId}")
     public ResponseEntity<?> postAd(@PathVariable Long userId, @ModelAttribute AdDTO adDTO) throws IOException {
@@ -36,14 +41,14 @@ public class CompanyController {
         }
     }
 
-    // Metode untuk mendapatkan semua iklan berdasarkan ID pengguna
+    // Metode untuk mendapatkan semua iklan berdasarkan ID pengguna untuk detail
     @GetMapping("/ads/{userId}")
     public ResponseEntity<?> getAllAdsByUserId(@PathVariable Long userId) {
         // Mengambil semua iklan menggunakan CompanyService
         return ResponseEntity.ok(companyService.getAllAds(userId));
     }
 
-    // Metode untuk mendapatkan iklan berdasarkan ID iklan
+    // Metode untuk mendapatkan iklan berdasarkan ID iklan untuk detail
     @GetMapping("/ad/{adId}")
     public ResponseEntity<?> getAdById(@PathVariable Long adId) {
         // Mengambil iklan menggunakan CompanyService
@@ -82,7 +87,7 @@ public class CompanyController {
         }
     }
 
-    // Metode untuk mendapatkan semua reservasi berdasarkan ID perusahaan
+    // Metode untuk mendapatkan semua reservasi berdasarkan ID perusahaan untuk detail
     @GetMapping("/bookings/{companyId}")
     public ResponseEntity<List<ReservationDTO>> getAllAdBookings(@PathVariable Long companyId) {
         // Mengambil semua reservasi menggunakan CompanyService
@@ -122,9 +127,69 @@ public class CompanyController {
     }
 
 
+
+    /// contact
     @GetMapping("/contacts")
     public ResponseEntity<?> getAllContact() {
         return ResponseEntity.ok(companyService.getAllContact());
+    }
+
+
+
+
+    /// article
+    @PostMapping("/article/{userId}")
+    public ResponseEntity<?> postArticle(@PathVariable Long userId, @ModelAttribute ArticleDTO articleDTO) throws IOException {
+        boolean success = blogService.postArticle(userId, articleDTO);
+        if (success) {
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User does not have the required Company role.");
+        }
+    }
+
+
+
+    //// awalan artikel
+    @GetMapping("/articles/{userId}")
+    public ResponseEntity<?> getAllArticlesByUserId(@PathVariable Long userId) {
+        return ResponseEntity.ok(blogService.getAllArticles(userId));
+    }
+
+    @GetMapping("/article/{articleId}")
+    public ResponseEntity<?> getArticleById(@PathVariable Long articleId) {
+        ArticleDTO articleDTO = blogService.getArticleById(articleId);
+        if (articleDTO != null) {
+            return ResponseEntity.ok(articleDTO);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @PutMapping("/article/{articleId}")
+    public ResponseEntity<?> updateArticle(@PathVariable Long articleId, @ModelAttribute ArticleDTO articleDTO) throws IOException {
+        boolean success = blogService.updateArticle(articleId, articleDTO);
+        if (success) {
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User does not have the required Company role.");
+        }
+    }
+
+    @DeleteMapping("/article/{articleId}")
+    public ResponseEntity<?> deleteArticle(@PathVariable Long articleId) {
+        boolean success = blogService.deleteArticle(articleId);
+        if (success) {
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Article not found or user does not have the required Company role.");
+        }
+    }
+
+    @GetMapping("/search/{title}")
+    public ResponseEntity<?> searchArticleByService(@PathVariable String title) {
+        // Mencari iklan menggunakan ClientService dan mengembalikan hasil pencarian
+        return ResponseEntity.ok(blogService.searchArticleByTitle(title));
     }
 
 }

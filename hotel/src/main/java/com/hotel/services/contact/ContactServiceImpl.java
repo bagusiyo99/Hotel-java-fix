@@ -33,10 +33,10 @@ public class ContactServiceImpl implements ContactService {
             User user = optionalUser.get();
             if (user.getRole() == UserRole.CLIENT) { // Pastikan pengguna memiliki peran COMPANY
                 Contact contact = new Contact();
-                contact.setName(contactDTO.getName());
+                contact.setPhone(contactDTO.getPhone());
                 contact.setAddress(contactDTO.getAddress());
                 contact.setDescription(contactDTO.getDescription());
-
+                contact.setCreatedAt(new Date());
                 contact.setUser(user);
                 contact.setCreatedAt(new Date());
                 contactRepository.save(contact);
@@ -67,8 +67,8 @@ public class ContactServiceImpl implements ContactService {
     }
 
 
-    public List<ContactDTO> searchContactByName(String name) {
-        return contactRepository.findAllByNameContaining(name).stream().map(Contact::getContactDto).collect(Collectors.toList());
+    public List<ContactDTO> searchContactByName(String address) {
+        return contactRepository.findAllByAddressContaining(address).stream().map(Contact::getContactDto).collect(Collectors.toList());
     }
 
 

@@ -1,6 +1,6 @@
 package com.hotel.entity;
 
-import com.hotel.dto.ArticleDTO;
+
 import com.hotel.dto.ContactDTO;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -19,7 +19,8 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String phone;
+
     private String address;
     @Lob
     @Column(length = 1000) // Mengatur panjang maksimum kolom menjadi 1000 karakter
@@ -41,7 +42,7 @@ public class Contact {
     public ContactDTO getContactDto() {
         ContactDTO contactDTO  = new ContactDTO();
         contactDTO.setId(id);
-        contactDTO.setName(name);
+        contactDTO.setPhone(phone);
         contactDTO.setDescription(description);
         contactDTO.setAddress(address);
         contactDTO.setCreatedAt(createdAt);
