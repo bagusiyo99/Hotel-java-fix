@@ -8,7 +8,7 @@
 
 
 
-<nz-table #basicTable [nzData]="bookedServices" [nzPageSize]="20" nzShowPagination="false" nzBordered="true" nzSize="middle" style="padding: 100px;">
+<nz-table #basicTable [nzData]="bookedServices" [nzPageSize]="20" nzShowPagination="false" nzBordered="true" nzSize="middle" style="padding: 20px 100px;">
 
   <thead>
     <tr>
@@ -46,9 +46,11 @@
 
       <td>
 
-
+        <span *ngIf="booking.reservationStatus === 'REJECTED'">
+          <span style="color: red;font-weight: bold;"> Tidak Tersedia</span>
+        </span>
         <span *ngIf="booking.reservationStatus === 'APPROVED'">
-          <button nzSize="small" nz-button nzType="primary" (click)="downloadInvoice(booking)">Download Kwitansi</button>
+          <button class="btn-kwitansi" nz-button (click)="downloadInvoice(booking)">Download Kwitansi</button>
         </span>
       </td>
     </tr>

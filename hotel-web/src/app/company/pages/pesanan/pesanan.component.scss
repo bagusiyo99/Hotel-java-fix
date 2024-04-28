@@ -4,15 +4,15 @@
 // }
 
 .menu-inner {
-  margin: 50px 50px;
+  margin: 20px 20px;
 }
 
 .approved-total {
   background-color: #f9f9f9;
   border-radius: 5px;
-  padding: 15px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   text-align: center;
   /* Pusatkan teks */
 }
@@ -25,9 +25,54 @@
 
 .total-amount {
   font-size: 24px;
-  color: #1ab394;
+  color: #17594A;
+  font-weight: 700;
   margin: 0 auto;
   /* Pusatkan horizontal */
   display: inline-block;
   /* Gunakan inline-block agar bisa menerapkan margin auto */
+}
+
+.btn-approve {
+  border-radius: 5px;
+  background-color: #17594A;
+  color: #f9f9f9;
+}
+
+
+.btn-reject {
+  border-radius: 5px;
+  background-color: #e21405;
+  color: #f9f9f9;
+}
+
+
+.btn-kwitansi {
+  border-radius: 5px;
+  background-color: #164B60;
+  color: #f9f9f9;
+}
+
+
+.btn-carii {
+  border-radius: 5px;
+  background-color: #17594A;
+  margin-left: 5px;
+  color: #f9f9f9;
+}
+
+.tangal {
+  margin-left: 39px;
+}
+
+
+.heading {
+  white-space: nowrap;
+  /* Teks tidak akan dibungkus ke baris berikutnya */
+  overflow: hidden;
+  /* Teks yang melebihi lebar kolom akan terpotong */
+  text-overflow: ellipsis;
+  /* Teks yang terpotong akan ditampilkan dengan tanda elipsis (...) */
+  max-width: 200px;
+  /* Atur lebar maksimum kolom */
 }

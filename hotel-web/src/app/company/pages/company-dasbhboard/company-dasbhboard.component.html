@@ -1,21 +1,14 @@
 <div class="container">
-  <h2 class="text-center mb-4 mt-5">Laporan Hotel</h2>
-
-
+  <h2 class="text-center mb-2 mt-2">Laporan Pendapatan Hotel</h2>
 </div>
 
-
-<div class="container mt-5">
+<div class="container mt-3">
   <div class="row align-items-center jumbotron">
-    <!-- Kolom gambar -->
     <div class="col-md-6">
       <img src="/assets/3.png" alt="Gambar Selamat Datang" class="img-fluid">
     </div>
 
-    <!-- Kolom teks -->
     <div class="col-md-6">
-      <!-- <h1 class="display-4">Selamat datang</h1> -->
-      <!-- Kartu Informasi Total Pendapatan -->
       <div class="card bg-primary text-white mx-auto mb-4" style="max-width: 30rem;">
         <div class="card-body">
           <h5 class="card-title">Total Pendapatan</h5>
@@ -23,7 +16,6 @@
         </div>
       </div>
 
-      <!-- Kartu Informasi Total Pajak -->
       <div class="card bg-success text-white mx-auto mb-4" style="max-width: 30rem;">
         <div class="card-body">
           <h5 class="card-title">Total Pajak</h5>
@@ -31,14 +23,21 @@
         </div>
       </div>
 
-      <!-- Kartu Informasi Room Terbanyak Dipesan -->
       <div class="card bg-info text-white mx-auto mb-4" style="max-width: 30rem;">
         <div class="card-body">
           <h5 class="card-title">Room Terbanyak Dipesan</h5>
           <p class="card-text">{{ roomTerbanyak }}</p>
         </div>
       </div>
-    </div>
 
-    <!-- Daftar pemesanan pengguna -->
+      <div class="card bg-dark text-white mx-auto mb-4" style="max-width: 30rem;">
+        <div class="card-body">
+          <h5 class="card-title">Total Pemesanan </h5>
+          <p class="card-text">{{ totalPemesananDiApprove }} Ruangan</p>
+        </div>
+      </div>
+
+
+    </div>
   </div>
+</div>

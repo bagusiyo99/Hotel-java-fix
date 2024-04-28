@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { CompanyService } from '../../services/company.service';
 import * as XLSX from 'xlsx';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-pesanan',
@@ -10,22 +13,33 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./pesanan.component.scss']
 })
 export class PesananComponent {
- bookings: any;
- 
+bookings: any;
+  searchDate: Date;
+  originalBookings: any[]; // Menyimpan salinan data asli
+  validateForm!: FormGroup;
+    ads: any[] = [];
+
 
   constructor(
     private companyService: CompanyService,
     private notification: NzNotificationService,
-    private router: Router
+    private router: Router,
+        private fb: FormBuilder
+
   ) {}
 
   ngOnInit() {
+      this.validateForm = this.fb.group({
+      service: [null, [Validators.required]],
+    });
     this.getAllAdBookings();
   }
 
  getAllAdBookings() {
     this.companyService.getAllAdBookings().subscribe(res => {
-      // Ubah checkInDate dan checkOutDate ke objek Date
+      // Ubah checkInDate dan checkOutDate ke objek 
+          this.originalBookings = res.map(item => ({ ...item }));
+
       res.forEach(item => {
         item.checkInDate = new Date(item.checkInDate);
         item.checkOutDate = new Date(item.checkOutDate);
@@ -87,6 +101,39 @@ export class PesananComponent {
       }
     );
   }
+
+searchAdByName() {
+  const searchTerm = this.validateForm.get('service').value.toLowerCase(); // Dapatkan nilai pencarian serviceName dan ubah ke huruf kecil
+  
+  // Lakukan pemanggilan ke server untuk mencari pemesanan berdasarkan searchTerm
+  this.companyService.getAllAdBookings().subscribe(
+    res => {
+      // Filter data iklan berdasarkan pencarian pengguna
+      this.bookings = res.filter(booking => booking.serviceName.toLowerCase().includes(searchTerm));
+      
+      // Tambahkan logika lain sesuai kebutuhan
+
+      // Jika tidak ada hasil yang ditemukan, tampilkan notifikasi
+      if (this.bookings.length === 0) {
+        this.notification.warning(
+          'Peringatan',
+          'Tidak ada data yang ditemukan untuk pencarian Anda',
+          { nzDuration: 5000 }
+        );
+      }
+    },
+    error => {
+      // Penanganan kesalahan
+      console.error('Gagal mencari iklan:', error);
+      this.notification.error(
+        'ERROR',
+        'Gagal mencari data',
+        { nzDuration: 5000 }
+      );
+    }
+  );
+}
+
 
   formatPrice(price: number): string {
     // Format harga dalam format mata uang Indonesia (IDR)
@@ -449,5 +496,31 @@ deleteBooking() {
     );
   });
 }
+
+
+
+
+searchByDate(): void {
+    if (!this.searchDate) {
+      // Jika tanggal pencarian tidak ditentukan, tampilkan semua pemesanan
+      this.bookings = this.originalBookings; // Gunakan data asli
+      return;
+    }
+
+    // Lakukan pencarian berdasarkan tanggal check-in yang cocok dengan tanggal pencarian
+    this.bookings = this.originalBookings.filter(booking =>
+      new Date(booking.checkInDate).getDate() === this.searchDate.getDate()
+    );
+
+    // Tampilkan notifikasi jika tidak ada data yang ditemukan
+    if (this.bookings.length === 0) {
+      this.notification.info(
+        'INFO',
+        'Tidak ada pemesanan yang ditemukan untuk tanggal ini',
+        { nzDuration: 5000 }
+      );
+    }
+  }
+
 
 }

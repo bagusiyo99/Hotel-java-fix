@@ -1,7 +1,7 @@
-<div class="container mt-4" *ngIf="ad">
-  <button nz-button nzType="default" routerLink="/client/postingan" class="btn btn-green mt-3">Kembali</button>
+<div class="container mt-2" *ngIf="ad">
+  <button nz-button nzType="default" routerLink="/client/postingan" class="btn btn-green mt-2">Kembali</button>
 
-  <div class="row mt-5">
+  <div class="row mt-3">
 
     <div class="col-lg-9">
       <div class="card">
@@ -9,7 +9,7 @@
           <!-- Detail Konten -->
           <div class="row align-items-center mb-3">
             <!-- Gambar Profil -->
-            <img class="profile" [src]="avatarUrl" alt="Ad Image" style="width: 100%;" />
+            <img class="profile" [src]="avatarUrl" alt="Ad Image" style="width: 100%; height: 500px ; " />
             <div class="text-container">
               <h3 class="fw-bold text-dark mb-2">{{ ad.serviceName }}</h3>
               <p class="text-muted mb-1"><strong><span class="text-success">{{ formatPrice(ad.price) }}</span>

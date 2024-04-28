@@ -1,21 +1,22 @@
 <nz-table #basicTable [nzData]="contacts" [nzPageSize]="20" nzShowPagination="false" nzBordered="true" nzSize="middle" style="padding: 100px;">
   <thead>
     <tr>
-      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Nama Pengirim</th> <!-- Ganti 'Nama Pengguna' sesuai kebutuhan -->
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white; width: 150px; font-size: 20px;">Nama Pengirim</th>
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white; width: 100px; font-size: 20px;">Telpon</th>
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white; width: 200px; font-size: 20px;">Alamat</th>
+      <th class="heading" style="background-color: rgb(25, 135, 84); color: white; width: 300px; font-size: 20px;">Kritik Dan Saran</th>
 
-      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Telpon </th>
-      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Alamat</th>
-      <th class="heading" style="background-color: rgb(25, 135, 84); color: white;">Kritik Dan Saran</th>
 
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let contact of contacts">
-      <td style="font-weight: 600; padding: 10px;">{{ contact.companyName }}</td> <!-- Gunakan 'companyName' sesuai dengan nama atribut yang diinginkan -->
+      <td style="font-weight: 600; padding: 10px; font-size: 16px;">{{ contact.companyName }}</td> <!-- Gunakan 'companyName' sesuai dengan nama atribut yang diinginkan -->
 
-      <td style="font-weight: 600; padding: 10px;">{{ contact.phone }}</td>
-      <td style="font-weight: 600; padding: 10px;">{{ contact.description }}</td>
-      <td style="font-weight: 600; padding: 10px;">{{ contact.address }}</td>
+      <td style="font-weight: 600; padding: 10px; font-size: 16px;">{{ contact.phone }}</td>
+      <td style="font-weight: 600; padding: 10px; font-size: 16px;">{{ contact.address }}</td>
+      <td style="font-weight: 600; padding: 10px; font-size: 16px;">{{ contact.description }}</td>
+
 
     </tr>
   </tbody>

@@ -16,6 +16,7 @@ import { InvoiceCompanyComponent } from './pages/invoice-company/invoice-company
 import { PesananComponent } from './pages/pesanan/pesanan.component';
 import { ContactsComponent } from './pages/contacts/contacts.component';
 
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -36,7 +37,10 @@ ContactsComponent,
     CompanyRoutingModule,
     DemoNgZorroAntdModule,
     ReactiveFormsModule,
-    NzListModule
+    NzListModule, 
+    FormsModule,
+ReactiveFormsModule
+
   ]
 })
 export class CompanyModule { }

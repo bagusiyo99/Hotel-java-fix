@@ -24,9 +24,16 @@
   color: #1ab394;
   margin: 0 auto;
   text-align: center;
+  font-weight: 700;
 }
 
 .btn {
   float: right;
   /* Pindahkan tombol ke kanan */
+}
+
+.btn-kwitansi {
+  border-radius: 5px;
+  background-color: #164B60;
+  color: #f9f9f9;
 }
