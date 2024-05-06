@@ -186,7 +186,7 @@ public class CompanyController {
         }
     }
 
-    @GetMapping("/search/{title}")
+    @GetMapping("/cari/{title}")
     public ResponseEntity<?> searchArticleByService(@PathVariable String title) {
         // Mencari iklan menggunakan ClientService dan mengembalikan hasil pencarian
         return ResponseEntity.ok(blogService.searchArticleByTitle(title));
