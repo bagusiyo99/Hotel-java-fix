@@ -13,5 +13,5 @@ Landing page : HTML Codex
 - unplash
 - manypixels
 
-#update terbaru :
-https://lnkd.in/g7UsTkDv
+#update terbaru : https://www.youtube.com/watch?v=YHCSMarSdZI
+
