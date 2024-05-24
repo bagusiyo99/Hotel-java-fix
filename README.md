@@ -4,10 +4,10 @@
 - Laporan Pendapatan
 - Boking
 - Kwitansi
--Dan lain-lain
+- Dan lain-lain
 
 #template bootstrap license:
-Landing page : HTML Codex
+# Landing page : HTML Codex
 
 #License image:
 - unplash
